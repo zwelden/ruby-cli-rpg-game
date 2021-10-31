@@ -20,6 +20,9 @@ class ActionHandler
         when "d"
             player.move_right (map)
             true
+        when "sleep"
+            player.sleep 
+            true
         else 
             true
         end 

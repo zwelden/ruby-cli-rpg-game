@@ -7,11 +7,38 @@ class Hero
 
     def initialize(name)
         @name = name
-        @health = 25
-        @stregth = 5
+        @max_health = 50
+        @health = 50
+        @strength = 5
         @defense = 3
         @coords = [0,0]
     end
+
+    def reduce_health(amount)
+        @health -= amount 
+        if (@health < 0)
+            @health = 0 
+        end
+    end 
+
+    def increase_health(amount)
+        @health += amount 
+        if (@health > @max_health)
+            @health = @max_health
+        end 
+    end 
+
+    def sleep 
+        restore_health = @max_health / 2 
+        increase_health(restore_health)
+        puts "You sleep and restore a bit of health"
+        puts "Press any key to continue"
+        gets
+    end 
+    
+    def is_alive? 
+        return @health > 0
+    end 
 
     def setCoords(newX, newY)
         @coords = [newX, newY]
