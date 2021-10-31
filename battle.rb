@@ -116,6 +116,24 @@ class Battle
         system "clear"
         monster_info = list_monster_targets()
         puts monster_info + "\n"
+        
+        live_monsters = 0
+        first_live_monster = nil
+
+        @monsters.each do |monster|
+            if monster.is_alive?
+                if first_live_monster == nil 
+                    first_live_monster = monster 
+                end 
+                live_monsters += 1 
+            end 
+        end 
+
+        if live_monsters == 1 
+            return first_live_monster 
+        end 
+
+        
         puts "Which monster would you like to attack?"
         monster_number = gets.chomp.to_i
         monster_number -= 1
@@ -130,6 +148,10 @@ class Battle
     def fight_monster(monster)
         damage = calculate_damage(@player, monster)
         monster.reduce_health(damage)
+
+        if (monster.is_alive? == false)
+            puts "#{@player.name} kills #{monster.name}"
+        end 
     end 
 
     def monster_attacks 
