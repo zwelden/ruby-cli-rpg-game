@@ -1,4 +1,5 @@
 require "./utilities.rb"
+require "./animations.rb"
 
 class Hero
     attr_reader :name 
@@ -7,6 +8,8 @@ class Hero
     attr_reader :defense
     attr_reader :coords
     attr_reader :recently_slept
+    attr_reader :experience
+    attr_reader :level
 
     def initialize(name)
         @name = name
@@ -14,6 +17,8 @@ class Hero
         @health = 50
         @strength = 5
         @defense = 3
+        @experience = 0
+        @level = 1
         @recently_slept = false
         @recently_slept_move_counter = 0
         @coords = [0,0]
@@ -44,6 +49,7 @@ class Hero
         increase_health(restore_health)
         @recently_slept = true
         @recently_slept_move_counter = 3
+        Animations.sleep_player()
         puts "You sleep and restore a bit of health"
         press_any_key_to_continue()
     end
@@ -57,7 +63,15 @@ class Hero
         end 
     end 
 
-    
+    def increase_experience(amount)
+        puts "+ #{amount} experience gained"
+        @experience += amount 
+    end 
+  
+    def increase_level 
+        @level += 1
+    end
+
     def is_alive? 
         return @health > 0
     end 
