@@ -21,6 +21,7 @@ while (ah.handle_action(action, hero, game_map) && hero.is_alive?)
     has_monsters = ah.check_for_battle(hero, game_map)
     if has_monsters
         Animations.battle
+        press_any_key_to_continue()
         Battle.new(hero, game_map)
         if (hero.is_alive? == false)
             break
@@ -35,12 +36,8 @@ while (ah.handle_action(action, hero, game_map) && hero.is_alive?)
 end
 
 system "clear"
-puts <<~END 
-    \n\n\n\n\n
-    \u0020\u0020\u0020╔═══════════╗
-    \u0020\u0020\u0020║ Game Over ║
-    \u0020\u0020\u0020╚═══════════╝
-    \n\n\n\n\n
-END
+Animations.game_over 
+press_any_key_to_continue()
+system "clear"
 
 

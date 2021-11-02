@@ -1,5 +1,13 @@
 class Animations 
 
+    def self.run_animation(keyframes)
+        keyframes.each do |keyframe|
+            system "clear"
+            puts keyframe 
+            sleep(0.25)
+        end 
+    end
+
     def self.sleep_player 
         keyframes = [<<FRAME1,<<FRAME2,<<FRAME3,<<FRAME4,<<FRAME5,<<FRAME6,<<FRAME7,<<FRAME8,<<FRAME9 ]
   SLEEPING.
@@ -52,8 +60,8 @@ FRAME5
     *****
   *       *
 *           *
-*     /     *
-  *  /    *
+*    /      *
+  * /     *
     *****
 FRAME6
   SLEEPING...
@@ -313,11 +321,72 @@ FRAME17
     end
 
 
-    def self.run_animation(keyframes)
-        keyframes.each do |keyframe|
-            system "clear"
-            puts keyframe 
-            sleep(0.25)
-        end 
+    def self.game_over
+        keyframes = [<<FRAME1,<<FRAME2,<<FRAME3,<<FRAME4,<<FRAME5,<<FRAME6,<<FRAME7,<<FRAME8,<<FRAME9] 
+
+
+FRAME1
+            ╚═══════════════╝  
+ 
+            
+FRAME2
+            ║               ║
+            ╚═══════════════╝
+
+
+FRAME3
+            ║   Game Over   ║
+            ║               ║
+            ╚═══════════════╝
+  
+            
+FRAME4
+            ║               ║
+            ║   Game Over   ║
+            ║               ║
+            ╚═══════════════╝
+
+
+FRAME5
+            ╔═══════════════╗
+            ║               ║
+            ║   Game Over   ║
+            ║               ║
+            ╚═══════════════╝
+
+
+FRAME6
+
+            ╔═══════════════╗
+            ║               ║
+            ║   Game Over   ║
+            ║               ║
+            ╚═══════════════╝
+
+
+FRAME7
+
+
+            ╔═══════════════╗
+            ║               ║
+            ║   Game Over   ║
+            ║               ║
+            ╚═══════════════╝
+
+
+FRAME8
+
+
+
+            ╔═══════════════╗
+            ║               ║
+            ║   Game Over   ║
+            ║               ║
+            ╚═══════════════╝
+
+
+FRAME9
+
+        self.run_animation(keyframes)
     end
 end
