@@ -1,7 +1,7 @@
 require 'io/console'
 require './string_colorize.rb'
 
-class GameMap
+class Map
     def initialize(tiles)
         @tiles = tiles
     end 

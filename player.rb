@@ -1,7 +1,7 @@
 require "./utilities.rb"
 require "./animations.rb"
 
-class Hero
+class Player
     attr_reader :name 
     attr_reader :health
     attr_reader :strength 

@@ -5,12 +5,14 @@ class Tile
     attr_reader :display 
     attr_reader :monsters
     attr_reader :passible
+    attr_reader :monster_chance
     
     def initialize(tile_type, monsters=[])
         @type = tile_type 
         @display = determine_display(tile_type)
         @monsters = monsters
         @passible = determine_passibility(tile_type)
+        @monster_chance = determine_monster_chance(tile_type)
     end 
 
     def to_s
@@ -20,6 +22,10 @@ class Tile
     def inspect 
         "<Tile type=#{type}>"
     end
+
+    def load_monsters(monsters)
+        @monsters = monsters
+    end 
 
     def has_monsters? 
         @monsters.length > 0
@@ -41,6 +47,19 @@ class Tile
             else
                 true
             end    
+        end 
+
+        def determine_monster_chance(tile_type)  
+            case tile_type
+            when "g"
+                1
+            when "m"
+                10
+            when "f"
+                5
+            else  
+                0
+            end
         end 
 
         def determine_display(tile_type)

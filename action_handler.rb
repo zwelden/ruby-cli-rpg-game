@@ -27,10 +27,5 @@ class ActionHandler
             true
         end 
     end 
-
-    def check_for_battle(player, map)
-        player_x, player_y = player.coords 
-        return map.has_monsters?(player_x, player_y)
-    end
 end 
         

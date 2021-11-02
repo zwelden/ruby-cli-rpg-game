@@ -40,17 +40,8 @@ class MapTemplates
         map_template.each do |row|
             tile_row = []
             row.each do |tile_type|
-                
                 monster_arr = []
-        
-                if rand(10) == 0
-                    monster_count = rand(1..3)
-                    monster_count.times do
-                        monster_info = monsters.sample
-                        monster_arr.push(Monster.new(*monster_info))
-                    end 
-                end 
-        
+                # load preset monsters 
                 tile_row.push(Tile.new(tile_type, monster_arr))
             end 
             tiles.push(tile_row)
