@@ -1,6 +1,6 @@
-require './map.rb'
-require "./tile.rb"
-require "./monster.rb"
+require 'map/map'
+require "map/tile"
+require "character/enemy"
 
 class MapGenerator 
 
@@ -38,9 +38,9 @@ class MapGenerator
         tile_detail.each do |row|
             tile_row = []
             row.each do |tile_type|
-                monster_arr = []
-                # load preset monsters 
-                tile_row.push(Tile.new(tile_type, monster_arr))
+                enemy_arr = []
+                # load preset enemies 
+                tile_row.push(Tile.new(tile_type, enemy_arr))
             end 
             tiles.push(tile_row)
         end 

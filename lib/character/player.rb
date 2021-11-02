@@ -1,24 +1,15 @@
-require "./utilities.rb"
-require "./animations.rb"
+require "helpers/utilities"
+require "animations"
+require "character/character"
 
-class Player
-    attr_reader :name 
-    attr_reader :health
-    attr_reader :strength 
-    attr_reader :defense
+class Player < Character
     attr_reader :coords
     attr_reader :recently_slept
     attr_reader :experience
-    attr_reader :level
 
     def initialize(name)
-        @name = name
-        @max_health = 50
-        @health = 50
-        @strength = 6
-        @defense = 3
-        @experience = 0
-        @level = 1
+        super(name, 50, 6, 3, 1)
+
         @recently_slept = false
         @recently_slept_move_counter = 0
         @coords = [0,0]
@@ -29,20 +20,6 @@ class Player
         player_name = gets.chomp.strip
         return Player.new(player_name)
     end
-
-    def reduce_health(amount)
-        @health -= amount 
-        if (@health < 0)
-            @health = 0 
-        end
-    end 
-
-    def increase_health(amount)
-        @health += amount 
-        if (@health > @max_health)
-            @health = @max_health
-        end 
-    end 
 
     def sleep 
         if (@recently_slept == true)
@@ -77,10 +54,6 @@ class Player
     def increase_level 
         @level += 1
     end
-
-    def is_alive? 
-        return @health > 0
-    end 
 
     def set_coords(newX, newY)
         @coords = [newX, newY]

@@ -1,4 +1,4 @@
-require "./dice.rb"
+require "helpers/dice"
 
 class Battle 
     def initialize(player, map)
@@ -6,39 +6,39 @@ class Battle
 
         @player = player 
         @tile = map.get_tile(player_x, player_y)
-        @monsters = @tile.monsters
+        @enemies = @tile.enemies
         @in_battle = true
 
         battle_loop()
     end 
 
-    def list_monster_targets 
-        monster_info = ""
+    def list_enemy_targets 
+        enemy_info = ""
 
-        @monsters.each_with_index do |monster, m_idx|
-            name = monster.name 
-            health = monster.health
-            strength = monster.strength
+        @enemies.each_with_index do |enemy, m_idx|
+            name = enemy.name 
+            health = enemy.health
+            strength = enemy.strength
             selection = m_idx + 1
 
-            if monster.is_alive?
-                monster_info << "#{selection}.) #{name} - Health: #{health} Strength: #{strength}\n"
+            if enemy.is_alive?
+                enemy_info << "#{selection}.) #{name} - Health: #{health} Strength: #{strength}\n"
             else 
-                monster_info << "#{selection}.) #{name} - DEAD\n"
+                enemy_info << "#{selection}.) #{name} - DEAD\n"
             end
         end
     
-        monster_info 
+        enemy_info 
     end
 
     def define_battle 
         system "clear"
 
-        monster_info = list_monster_targets()
+        enemy_info = list_enemy_targets()
 
         battle_detail = <<~END
-            You have encountered monsters
-            #{monster_info}
+            You have encountered enemies
+            #{enemy_info}
         END
 
         puts battle_detail
@@ -85,13 +85,13 @@ class Battle
     def run_away 
         total_damage = 0 
 
-        @monsters.each do |monster|
-            if (monster.is_alive? && @player.is_alive? && Dice.d10 >= 5)
-                damage_taken = calculate_damage(monster, @player)
+        @enemies.each do |enemy|
+            if (enemy.is_alive? && @player.is_alive? && Dice.d10 >= 5)
+                damage_taken = calculate_damage(enemy, @player)
                 total_damage += damage_taken
                 @player.reduce_health(damage_taken)
             elsif (@player.is_alive?)
-                puts "#{monster.name} is caught flat footed and is unable to attack #{@player.name}"
+                puts "#{enemy.name} is caught flat footed and is unable to attack #{@player.name}"
             end
         end 
         
@@ -104,7 +104,7 @@ class Battle
         end 
 
         if (@player.is_alive?)
-            @tile.defeat_monsters
+            @tile.defeat_enemies
         end 
 
         @in_battle = false
@@ -112,74 +112,74 @@ class Battle
         gets
     end
 
-    def select_monster 
+    def select_enemy 
         system "clear"
-        monster_info = list_monster_targets()
-        puts monster_info + "\n"
-        
-        live_monsters = 0
-        first_live_monster = nil
+        enemy_info = list_enemy_targets()
+        puts enemy_info + "\n"
 
-        @monsters.each do |monster|
-            if monster.is_alive?
-                if first_live_monster == nil 
-                    first_live_monster = monster 
+        live_enemies = 0
+        first_live_enemy = nil
+
+        @enemies.each do |enemy|
+            if enemy.is_alive?
+                if first_live_enemy == nil 
+                    first_live_enemy = enemy 
                 end 
-                live_monsters += 1 
+                live_enemies += 1 
             end 
         end 
 
-        if live_monsters == 1 
-            return first_live_monster 
+        if live_enemies == 1 
+            return first_live_enemy 
         end 
 
         
-        puts "Which monster would you like to attack?"
-        monster_number = gets.chomp.to_i
-        monster_number -= 1
+        puts "Which enemy would you like to attack?"
+        enemy_number = gets.chomp.to_i
+        enemy_number -= 1
 
-        if (monster_number >= 0 && monster_number < @monsters.length && @monsters[monster_number].is_alive?)
-            return @monsters[monster_number] 
+        if (enemy_number >= 0 && enemy_number < @enemies.length && @enemies[enemy_number].is_alive?)
+            return @enemies[enemy_number] 
         else 
-            return select_monster()
+            return select_enemy()
         end 
     end
         
-    def fight_monster(monster)
-        damage = calculate_damage(@player, monster)
-        monster.reduce_health(damage)
+    def fight_enemy(enemy)
+        damage = calculate_damage(@player, enemy)
+        enemy.reduce_health(damage)
 
-        if (monster.is_alive? == false)
-            puts "#{@player.name} kills #{monster.name}"
+        if (enemy.is_alive? == false)
+            puts "#{@player.name} kills #{enemy.name}"
         end 
     end 
 
-    def monster_attacks 
-        puts "The monster(s) attack"
+    def enemy_attacks 
+        puts "The enemy(s) attack"
 
-        @monsters.each do |monster|
-            if (monster.is_alive? && @player.is_alive?)
-                damage_taken = calculate_damage(monster, @player)
+        @enemies.each do |enemy|
+            if (enemy.is_alive? && @player.is_alive?)
+                damage_taken = calculate_damage(enemy, @player)
                 @player.reduce_health(damage_taken)
             end
         end 
 
         if (@player.is_alive? == false)
-            puts "The monsters have killed you."
+            puts "The enemies have killed you."
         else 
-            puts "Monsters have finished attacking."
+            puts "enemies have finished attacking."
         end 
     end 
 
-    def all_monsters_dead? 
-        monster_alive = false 
-        @monsters.each do |monster|
-            if (monster.is_alive?)
-                monster_alive = true 
+    def all_enemies_dead? 
+        enemy_alive = false 
+        @enemies.each do |enemy|
+            if (enemy.is_alive?)
+                enemy_alive = true 
             end 
         end 
 
-        !monster_alive 
+        !enemy_alive 
     end 
         
     def handle_battle_action(action)
@@ -188,14 +188,14 @@ class Battle
             run_away()
             
         when "f"
-            monster = select_monster()
-            fight_monster(monster)
+            enemy = select_enemy()
+            fight_enemy(enemy)
 
-            if (all_monsters_dead?())
-                @tile.defeat_monsters
-                puts "You fought the monsters and won. +10 experience"
+            if (all_enemies_dead?())
+                @tile.defeat_enemies
+                puts "You fought the enemies and won. +10 experience"
             else 
-                monster_attacks()
+                enemy_attacks()
             end 
 
             puts "Press any key to continue"
@@ -210,7 +210,7 @@ class Battle
     end
 
     def battle_loop 
-        while(@player.is_alive? && all_monsters_dead?() == false && @in_battle == true) 
+        while(@player.is_alive? && all_enemies_dead?() == false && @in_battle == true) 
             define_battle()
             action = get_next_battle_action()
             handle_battle_action(action)

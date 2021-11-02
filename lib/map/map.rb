@@ -1,5 +1,5 @@
 require 'io/console'
-require './string_colorize.rb'
+require 'helpers/string_colorize'
 
 class Map
     attr_reader :name 
@@ -19,9 +19,9 @@ class Map
         puts @tiles.inspect
     end
 
-    def has_monsters?(x, y)
+    def has_enemies?(x, y)
         tile = @tiles[y][x]
-        tile.has_monsters?
+        tile.has_enemies?
     end
 
     def is_passible?(x, y)

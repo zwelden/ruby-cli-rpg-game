@@ -1,13 +1,12 @@
-require "./player.rb"
-require "./map_generator.rb"
-require "./tile.rb"
-require "./action_handler.rb"
-require "./battle.rb"
-require "./animations.rb"
-require "./utilities.rb"
-require "./game.rb"
+$LOAD_PATH << './lib'
 
-
+require "character/player"
+require "map/map_generator"
+require "helpers/utilities"
+require "action_handler"
+require "battle"
+require "animations"
+require "game"
 
 Animations.title_sequence
 press_any_key_to_continue()
@@ -21,8 +20,8 @@ player.set_coords(*map.start_position)
 
 action = ""
 while (ah.handle_action(action, player, map) && player.is_alive?)
-    has_monsters = game.check_for_battle(player, map)
-    if has_monsters
+    has_enemies = game.check_for_battle(player, map)
+    if has_enemies
         Animations.battle
         press_any_key_to_continue()
         Battle.new(player, map)

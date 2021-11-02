@@ -1,18 +1,18 @@
-require "./string_colorize.rb"
+require "helpers/string_colorize"
 
 class Tile 
     attr_reader :type
     attr_reader :display 
-    attr_reader :monsters
+    attr_reader :enemies
     attr_reader :passible
-    attr_reader :monster_chance
+    attr_reader :enemy_chance
     
-    def initialize(tile_type, monsters=[])
+    def initialize(tile_type, enemies=[])
         @type = tile_type 
         @display = determine_display(tile_type)
-        @monsters = monsters
+        @enemies = enemies
         @passible = determine_passibility(tile_type)
-        @monster_chance = determine_monster_chance(tile_type)
+        @enemy_chance = determine_enemy_chance(tile_type)
     end 
 
     def to_s
@@ -23,16 +23,16 @@ class Tile
         "<Tile type=#{type}>"
     end
 
-    def load_monsters(monsters)
-        @monsters = monsters
+    def load_enemies(enemies)
+        @enemies = enemies
     end 
 
-    def has_monsters? 
-        @monsters.length > 0
+    def has_enemies? 
+        @enemies.length > 0
     end
 
-    def defeat_monsters 
-        @monsters = []
+    def defeat_enemies 
+        @enemies = []
     end
 
     private
@@ -49,7 +49,7 @@ class Tile
             end    
         end 
 
-        def determine_monster_chance(tile_type)  
+        def determine_enemy_chance(tile_type)  
             case tile_type
             when "g"
                 1
@@ -92,7 +92,7 @@ class Tile
                 ["A^A".colorize("bright_black"),
                  "^A^".colorize("bright_black")]
 
-            when "monster"
+            when "enemy"
                 ["#?#",
                  "?#?"]
 

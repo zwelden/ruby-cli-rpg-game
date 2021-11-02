@@ -1,7 +1,7 @@
-require './monster.rb'
+require 'character/enemy'
 
-class MonsterGenerator 
-    MONSTERS = {
+class EnemyGenerator 
+    ENEMIES = {
         bandit: {
             name: "Bandit",
             health: 10, 
@@ -39,40 +39,40 @@ class MonsterGenerator
         }
     }
     
-    def self.create_random_monster 
-        monster = MONSTERS[MONSTERS.keys.sample]
-        self.create_monster_from_const(monster)
+    def self.create_random_enemy 
+        enemy = ENEMIES[ENEMIES.keys.sample]
+        self.create_enemy_from_const(enemy)
     end 
 
     def new_bandit 
-        self.create_monster_from_const(MONSTERS[:bandit])
+        self.create_enemy_from_const(ENEMIES[:bandit])
     end 
 
     def new_goul 
-        self.create_monster_from_const(MONSTERS[:goul])
+        self.create_enemy_from_const(ENEMIES[:goul])
     end 
 
     def new_rat 
-        self.create_monster_from_const(MONSTERS[:rat])
+        self.create_enemy_from_const(ENEMIES[:rat])
     end 
 
     def new_skeleton 
-        self.create_monster_from_const(MONSTERS[:skeleton])
+        self.create_enemy_from_const(ENEMIES[:skeleton])
     end 
 
     def new_zombie 
-        self.create_monster_from_const(MONSTERS[:zombie])
+        self.create_enemy_from_const(ENEMIES[:zombie])
     end 
 
 
     private
-        def self.create_monster_from_const(monster)
-            name = monster.key?(:name) ? monster[:name] : 'Unknown Monster'
-            health = monster.key?(:health) ? monster[:health] : 10
-            strength = monster.key?(:strength) ? monster[:strength] : 1
-            defense = monster.key?(:defense) ? monster[:defense] : 1
-            level = monster.key?(:level) ? monster[:level] : 1
-            Monster.new(name, health, strength, defense, level)
+        def self.create_enemy_from_const(enemy)
+            name = enemy.key?(:name) ? enemy[:name] : 'Unknown enemy'
+            health = enemy.key?(:health) ? enemy[:health] : 10
+            strength = enemy.key?(:strength) ? enemy[:strength] : 1
+            defense = enemy.key?(:defense) ? enemy[:defense] : 1
+            level = enemy.key?(:level) ? enemy[:level] : 1
+            Enemy.new(name, health, strength, defense, level)
         end 
 
 end
