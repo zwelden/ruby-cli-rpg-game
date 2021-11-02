@@ -2,8 +2,13 @@ require 'io/console'
 require './string_colorize.rb'
 
 class Map
-    def initialize(tiles)
+    attr_reader :name 
+    attr_reader :start_position
+
+    def initialize(name, tiles, start_position)
+        @name = name
         @tiles = tiles
+        @start_position = start_position
     end 
 
     def inbounds?(x, y) 

@@ -3,12 +3,14 @@ class Monster
     attr_reader :health 
     attr_reader :strength
     attr_reader :defense
+    attr_reader :level
 
-    def initialize(name, health, strength, defense)
+    def initialize(name, health, strength, defense, level)
         @name = name 
         @health = health 
         @strength = strength 
         @defense = defense
+        @level = level
     end 
 
     def reduce_health(amount)

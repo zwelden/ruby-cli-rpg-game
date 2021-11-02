@@ -1,15 +1,13 @@
 require "./dice.rb"
+require "./monster_generator.rb"
 
 class Game 
     def create_monsters(tile)
-
-        monsters = [["Bandit", 10, 2, 2], ["Goul", 10, 1, 1], ["Rat", 5, 5, 1], ["Skeleton", 10, 5, 1], ["Zombie", 20, 3, 2]]
         monster_arr = []
         
         monster_count = rand(1..3)
         monster_count.times do
-            monster_info = monsters.sample
-            monster_arr.push(Monster.new(*monster_info))
+            monster_arr.push(MonsterGenerator.create_random_monster())
         end 
 
         tile.load_monsters(monster_arr)

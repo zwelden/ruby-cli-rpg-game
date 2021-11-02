@@ -1,22 +1,23 @@
 require "./player.rb"
-require "./map.rb"
+require "./map_generator.rb"
 require "./tile.rb"
 require "./action_handler.rb"
 require "./battle.rb"
-require "./map_templates.rb"
 require "./animations.rb"
 require "./utilities.rb"
 require "./game.rb"
 
-game = Game.new 
+
 
 Animations.title_sequence
 press_any_key_to_continue()
 
+game = Game.new 
 ah = ActionHandler.new
-tiles = MapTemplates.generate_map_tiles(1)
-map = Map.new(tiles)
-player = Player.new('Pequad')
+map = MapGenerator.generate_new_map(1)
+
+player = Player.generate_new_player
+player.set_coords(*map.start_position)
 
 action = ""
 while (ah.handle_action(action, player, map) && player.is_alive?)

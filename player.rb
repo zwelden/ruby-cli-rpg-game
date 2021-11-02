@@ -15,13 +15,19 @@ class Player
         @name = name
         @max_health = 50
         @health = 50
-        @strength = 5
+        @strength = 6
         @defense = 3
         @experience = 0
         @level = 1
         @recently_slept = false
         @recently_slept_move_counter = 0
         @coords = [0,0]
+    end
+
+    def self.generate_new_player
+        print "Choose a name for your character: "
+        player_name = gets.chomp.strip
+        return Player.new(player_name)
     end
 
     def reduce_health(amount)
@@ -76,7 +82,7 @@ class Player
         return @health > 0
     end 
 
-    def setCoords(newX, newY)
+    def set_coords(newX, newY)
         @coords = [newX, newY]
     end
 
@@ -84,7 +90,7 @@ class Player
         x_pos, y_pos = @coords
         new_y = y_pos - 1 
         if ( map.inbounds?(x_pos, new_y) && map.is_passible?(x_pos, new_y) )
-            setCoords(x_pos, new_y)
+            set_coords(x_pos, new_y)
             decrement_recent_sleep()
         end
     end 
@@ -93,7 +99,7 @@ class Player
         x_pos, y_pos = @coords
         new_y = y_pos + 1 
         if ( map.inbounds?(x_pos, new_y) && map.is_passible?(x_pos, new_y) )
-            setCoords(x_pos, new_y)
+            set_coords(x_pos, new_y)
             decrement_recent_sleep()
         end
     end 
@@ -102,7 +108,7 @@ class Player
         x_pos, y_pos = @coords
         new_x = x_pos - 1 
         if ( map.inbounds?(new_x, y_pos) && map.is_passible?(new_x, y_pos) )
-            setCoords(new_x, y_pos)
+            set_coords(new_x, y_pos)
             decrement_recent_sleep()
         end
     end 
@@ -111,7 +117,7 @@ class Player
         x_pos, y_pos = @coords
         new_x = x_pos + 1 
         if ( map.inbounds?(new_x, y_pos) && map.is_passible?(new_x, y_pos) )
-            setCoords(new_x, y_pos)
+            set_coords(new_x, y_pos)
             decrement_recent_sleep()
         end
     end 
