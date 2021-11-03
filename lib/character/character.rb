@@ -5,14 +5,18 @@ class Character
     attr_reader :strength 
     attr_reader :defense
     attr_reader :level
+    attr_reader :inventory 
+    attr_reader :gold
 
-    def initialize (name, health, strength, defense, level)
+    def initialize (name, health, strength, defense, level, inventory: [], gold: 0)
         @name = name
         @health = health 
         @max_health = health
         @strength = strength 
         @defense = defense
         @level = level 
+        @inventory = inventory 
+        @gold = gold
     end 
 
     def reduce_health(amount)

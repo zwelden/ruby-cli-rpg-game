@@ -40,33 +40,33 @@ class EnemyGenerator
     }
     
     def self.create_random_enemy 
-        enemy = ENEMIES[ENEMIES.keys.sample]
-        self.create_enemy_from_const(enemy)
+        self.create_enemy_from_const(ENEMIES.keys.sample)
     end 
 
     def new_bandit 
-        self.create_enemy_from_const(ENEMIES[:bandit])
+        self.create_enemy_from_const(:bandit)
     end 
 
     def new_goul 
-        self.create_enemy_from_const(ENEMIES[:goul])
+        self.create_enemy_from_const(:goul)
     end 
 
     def new_rat 
-        self.create_enemy_from_const(ENEMIES[:rat])
+        self.create_enemy_from_const(:rat)
     end 
 
     def new_skeleton 
-        self.create_enemy_from_const(ENEMIES[:skeleton])
+        self.create_enemy_from_const(:skeleton)
     end 
 
     def new_zombie 
-        self.create_enemy_from_const(ENEMIES[:zombie])
+        self.create_enemy_from_const(:zombie)
     end 
 
 
     private
         def self.create_enemy_from_const(enemy)
+            enemy = ENEMIES[enemy]
             name = enemy.key?(:name) ? enemy[:name] : 'Unknown enemy'
             health = enemy.key?(:health) ? enemy[:health] : 10
             strength = enemy.key?(:strength) ? enemy[:strength] : 1

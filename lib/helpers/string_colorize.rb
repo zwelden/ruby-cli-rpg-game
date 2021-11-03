@@ -79,6 +79,9 @@ class String
         when "underline"
             color_code = "4"
 
+        when "linethrough"
+            color_code = "9"
+
         end
         
         "\e[#{color_code}m#{self}\e[0m"

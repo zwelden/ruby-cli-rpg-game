@@ -1,5 +1,5 @@
 require "helpers/utilities"
-require "animations"
+require "ui/animations"
 require "character/character"
 
 class Player < Character
@@ -8,8 +8,9 @@ class Player < Character
     attr_reader :experience
 
     def initialize(name)
-        super(name, 50, 6, 3, 1)
+        super(name, 50, 6, 3, 1, gold: 10)
 
+        @experience = 0
         @recently_slept = false
         @recently_slept_move_counter = 0
         @coords = [0,0]

@@ -1,4 +1,7 @@
 require "helpers/dice"
+require 'helpers/utilities'
+require 'helpers/string_colorize'
+require 'ui/display'
 
 class Battle 
     def initialize(player, map)
@@ -15,18 +18,20 @@ class Battle
     def list_enemy_targets 
         enemy_info = ""
 
-        @enemies.each_with_index do |enemy, m_idx|
-            name = enemy.name 
-            health = enemy.health
-            strength = enemy.strength
-            selection = m_idx + 1
+        enemy_info = display_all_enemy_info(@enemies)
 
-            if enemy.is_alive?
-                enemy_info << "#{selection}.) #{name} - Health: #{health} Strength: #{strength}\n"
-            else 
-                enemy_info << "#{selection}.) #{name} - DEAD\n"
-            end
-        end
+        # @enemies.each_with_index do |enemy, m_idx|
+        #     name = enemy.name 
+        #     health = enemy.health
+        #     strength = enemy.strength
+        #     selection = m_idx + 1
+
+        #     if enemy.is_alive?
+        #         enemy_info << "#{selection}.) #{name} - Health: #{health} Strength: #{strength}\n"
+        #     else 
+        #         enemy_info << "#{selection}.) #{name} - DEAD\n"
+        #     end
+        # end
     
         enemy_info 
     end
@@ -34,16 +39,19 @@ class Battle
     def define_battle 
         system "clear"
 
-        enemy_info = list_enemy_targets()
+        # enemy_info = list_enemy_targets()
 
-        battle_detail = <<~END
-            You have encountered enemies
-            #{enemy_info}
-        END
+        # battle_detail = <<~END
+        #     You have encountered enemies
+        #     #{enemy_info}
+        # END
 
-        puts battle_detail
+        puts "You have encountered enemies"
+        Display.display_all_enemy_info(@enemies)
 
-        puts "#{@player.name} \n- Health: #{@player.health} \n- Strength: #{@player.strength} \n- Defense: #{@player.defense}\n\n"
+        # puts battle_detail
+
+        Display.player_info(@player)
 
         puts "What would you like to do?"
         puts "Run (r)"
@@ -108,14 +116,15 @@ class Battle
         end 
 
         @in_battle = false
-        puts "Press any key to continue"
-        gets
+        press_any_key_to_continue()
     end
 
     def select_enemy 
         system "clear"
-        enemy_info = list_enemy_targets()
-        puts enemy_info + "\n"
+        # enemy_info = list_enemy_targets()
+        # puts enemy_info + "\n"
+
+        Display.display_all_enemy_info(@enemies)
 
         live_enemies = 0
         first_live_enemy = nil
@@ -198,8 +207,7 @@ class Battle
                 enemy_attacks()
             end 
 
-            puts "Press any key to continue"
-            gets
+            press_any_key_to_continue()
 
         else
             puts "Invalid options. choose again."

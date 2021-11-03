@@ -3,9 +3,10 @@ $LOAD_PATH << './lib'
 require "character/player"
 require "map/map_generator"
 require "helpers/utilities"
+require "ui/animations"
+require "ui/display"
 require "action_handler"
 require "battle"
-require "animations"
 require "game"
 
 Animations.title_sequence
@@ -31,9 +32,9 @@ while (ah.handle_action(action, player, map) && player.is_alive?)
     end 
     system "clear"
     puts map.render_map(player)
-    puts "#{player.name} \n- Health: #{player.health} \n- Strength: #{player.strength} \n- Defense: #{player.defense}\n\n"
-    puts "Enter next action"
-
+    # puts "#{player.name} \n- Health: #{player.health} \n- Strength: #{player.strength} \n- Defense: #{player.defense}\n\n"
+    Display.player_info(player)
+    
     action = ah.get_next_action 
 end
 
