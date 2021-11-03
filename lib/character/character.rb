@@ -37,4 +37,11 @@ class Character
         return @health > 0
     end 
 
+    def add_gold(amount)
+        @gold += amount 
+    end 
+
+    def add_inventory(inventory)
+        @inventory.concat(inventory)
+    end 
 end

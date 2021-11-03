@@ -11,46 +11,16 @@ class Battle
         @tile = map.get_tile(player_x, player_y)
         @enemies = @tile.enemies
         @in_battle = true
+        @ran_away = false
 
         battle_loop()
     end 
 
-    def list_enemy_targets 
-        enemy_info = ""
-
-        enemy_info = display_all_enemy_info(@enemies)
-
-        # @enemies.each_with_index do |enemy, m_idx|
-        #     name = enemy.name 
-        #     health = enemy.health
-        #     strength = enemy.strength
-        #     selection = m_idx + 1
-
-        #     if enemy.is_alive?
-        #         enemy_info << "#{selection}.) #{name} - Health: #{health} Strength: #{strength}\n"
-        #     else 
-        #         enemy_info << "#{selection}.) #{name} - DEAD\n"
-        #     end
-        # end
-    
-        enemy_info 
-    end
-
     def define_battle 
         system "clear"
 
-        # enemy_info = list_enemy_targets()
-
-        # battle_detail = <<~END
-        #     You have encountered enemies
-        #     #{enemy_info}
-        # END
-
         puts "You have encountered enemies"
         Display.display_all_enemy_info(@enemies)
-
-        # puts battle_detail
-
         Display.player_info(@player)
 
         puts "What would you like to do?"
@@ -116,14 +86,11 @@ class Battle
         end 
 
         @in_battle = false
-        press_any_key_to_continue()
+        @ran_away = true
     end
 
     def select_enemy 
         system "clear"
-        # enemy_info = list_enemy_targets()
-        # puts enemy_info + "\n"
-
         Display.display_all_enemy_info(@enemies)
 
         live_enemies = 0
@@ -153,8 +120,22 @@ class Battle
             return select_enemy()
         end 
     end
+
+    def fight 
+        enemy = select_enemy()
+        attack_enemy(enemy)
+
+        if (all_enemies_dead?())
+            @tile.defeat_enemies
+            puts "You fought the enemies and won."
+        else 
+            enemy_attacks()
+        end 
+
+        press_any_key_to_continue()
+    end
         
-    def fight_enemy(enemy)
+    def attack_enemy(enemy)
         damage = calculate_damage(@player, enemy)
         enemy.reduce_health(damage)
 
@@ -190,6 +171,23 @@ class Battle
 
         !enemy_alive 
     end 
+
+    def get_battle_loot
+        gold = 0 
+        inventory = []
+
+        @enemies.each do |enemy|
+            gold += enemy.gold 
+            inventory.concat(enemy.inventory)
+        end 
+
+        [gold, inventory]
+    end 
+
+    def update_player_loot(gold, inventory)
+        @player.add_gold(gold) 
+        @player.add_inventory(inventory)
+    end
         
     def handle_battle_action(action)
         case action
@@ -197,17 +195,7 @@ class Battle
             run_away()
             
         when "f"
-            enemy = select_enemy()
-            fight_enemy(enemy)
-
-            if (all_enemies_dead?())
-                @tile.defeat_enemies
-                puts "You fought the enemies and won. +10 experience"
-            else 
-                enemy_attacks()
-            end 
-
-            press_any_key_to_continue()
+            fight()
 
         else
             puts "Invalid options. choose again."
@@ -223,5 +211,25 @@ class Battle
             action = get_next_battle_action()
             handle_battle_action(action)
         end
+
+        if (@ran_away == false && @player.is_alive? && all_enemies_dead?())
+            gold, inventory = get_battle_loot() 
+            update_player_loot(gold, inventory)
+            puts "VICTORY"
+            
+            if (gold > 0)
+                puts "You were able to loot #{gold} gold"
+            end 
+
+            if (inventory.length > 0)
+                puts "You looted the following items: "
+                inventory.each do |item|
+                    puts "- #{item}"
+                end  
+            end
+        end 
+
+        press_any_key_to_continue()
+
     end 
 end 

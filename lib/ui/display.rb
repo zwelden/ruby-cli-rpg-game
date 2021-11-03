@@ -3,7 +3,7 @@ require 'helpers/utilities'
 class Display 
 
     def self.player_info(player)
-        player_name_str = player.name.ljust(39, ' ');
+        player_name_str = player.name.ljust(39, ' ').colorize("green");
         health_str = "Health: #{player.health}".ljust(18, ' ')
         strength_str = "Strength: #{player.strength}".ljust(18, ' ')
         defense_str = "Defense: #{player.defense}".ljust(18, ' ')
@@ -67,7 +67,7 @@ class Display
         place_holder = "".ljust(15, ' ')
 
         if (enemy.is_alive?)
-            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ');
+            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ').colorize("red");
 
             display_info = <<~END 
                 ╒═══════════════════════════════════╕
@@ -78,7 +78,7 @@ class Display
                 ╘═════════════════╧═════════════════╛
             END
         else 
-            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ').colorize("linethrough");
+            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ').colorize("red").colorize("linethrough");
 
             display_info = <<~END 
                 ╒═══════════════════════════════════╕
@@ -105,6 +105,7 @@ class Display
             |                                                   |
             | OTHER                                             | 
             | sleep - rest player and restore 1/2 max health    |
+            | i - show player inventory                         |
             | help - displays this screen                       |
             ╘═══════════════════════════════════════════════════╛
         
@@ -113,4 +114,43 @@ class Display
         puts display 
         press_any_key_to_continue()
     end
+
+    def self.show_inventory(player)
+        puts "<><> INVENTORY <><>"
+
+        player.inventory.each do |item|
+            puts "- #{item}"
+        end 
+        puts "\n"
+        press_any_key_to_continue()
+    end
+
+    def self.treasure_found 
+        display_str = <<~END 
+                    YOU FOUND TREASURE!
+
+                             _.--.
+                         _.-'_:-'||
+                     _.-'_.-::::'||
+                _.-:'_.-::::::'  ||
+              .'`-.-:::::::'     ||
+             /.'`;|:::::::'      ||_
+            ||   ||::::::'     _.;._'-._
+            ||   ||:::::'  _.-!oo @.!-._'-.
+            \'.  ||:::::.-!()oo @!()@.-'_.|
+             '.'-;|:.-'.&$@.& ()$%-'o.'\U||
+               `>'-.!@%()@'@_%-'_.-o _.|'||
+                ||-._'-.@.-'_.-' _.-o  |'||
+                ||=[ '-._.-\U/.-'    o |'||
+                || '-.]=|| |'|      o  |'||
+                ||      || |'|        _| ';
+                ||      || |'|    _.-'_.-'
+                |'-._   || |'|_.-'_.-'
+                 '-._'-.|| |' `_.-'
+                     '-.||_/.-'
+
+        END
+
+        puts display_str
+    end 
 end

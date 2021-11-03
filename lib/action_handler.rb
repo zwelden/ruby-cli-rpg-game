@@ -28,6 +28,10 @@ class ActionHandler
             player.move(map, :right)
             true
 
+        when "i"
+            player.show_inventory()
+            true
+
         when "sleep"
             player.sleep 
             true

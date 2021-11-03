@@ -6,13 +6,17 @@ class Tile
     attr_reader :enemies
     attr_reader :passible
     attr_reader :enemy_chance
+    attr_reader :treasure_chance
+    attr_reader :treasure
     
-    def initialize(tile_type, enemies=[])
+    def initialize(tile_type, enemies=[], treasure={})
         @type = tile_type 
         @display = determine_display(tile_type)
         @enemies = enemies
         @passible = determine_passibility(tile_type)
         @enemy_chance = determine_enemy_chance(tile_type)
+        @treasure_chance = determine_treasure_chance(tile_type)
+        @treasure = treasure
     end 
 
     def to_s
@@ -34,6 +38,29 @@ class Tile
     def defeat_enemies 
         @enemies = []
     end
+
+    def load_treasure(gold, items)
+        if (gold > 0)
+            @treasure[:gold] = gold 
+        end 
+        
+        if (items.length > 0)
+            @treasure[:items] = items 
+        end 
+    end 
+
+    def has_treasure? 
+        return (@treasure.key?(:gold) && @treasure[:gold] > 0) ||  (@treasure.key?(:items) && @treasure[:items].length > 0)
+    end 
+
+    def loot_treasure
+        gold = (@treasure.key?(:gold) && @treasure[:gold] > 0) ? @treasure[:gold] : 0
+        items = (@treasure.key?(:items) && @treasure[:items].length > 0) ? @treasure[:items] : [] 
+    
+        @treasure = {}
+
+        {gold: gold, items: items}
+    end 
 
     private
         def determine_passibility(tile_type)
@@ -62,6 +89,22 @@ class Tile
 
             when "f"
                 6
+
+            else  
+                0
+            end
+        end 
+
+        def determine_treasure_chance(tile_type)
+            case tile_type
+            when "g"
+                1
+
+            when "m"
+                5
+
+            when "f"
+                3
 
             else  
                 0

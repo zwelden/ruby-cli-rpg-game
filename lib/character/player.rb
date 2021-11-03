@@ -1,4 +1,5 @@
 require "helpers/utilities"
+require 'ui/display'
 require "ui/animations"
 require "character/character"
 require 'game_log'
@@ -51,6 +52,13 @@ class Player < Character
             @recently_slept_move_counter = 0
             @recently_slept = false 
         end 
+    end 
+
+    def show_inventory 
+        update_prev_coords_from_current_position()
+
+        system "clear"
+        Display.show_inventory(self)
     end 
 
     def increase_experience(amount)
