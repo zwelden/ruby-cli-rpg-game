@@ -15,6 +15,10 @@ class Game
 
 
     def check_for_battle(player, map)
+        if (player.has_moved? == false)
+            return false 
+        end 
+
         player_x, player_y = player.coords 
 
         if (map.has_enemies?(player_x, player_y))

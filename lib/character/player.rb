@@ -1,9 +1,11 @@
 require "helpers/utilities"
 require "ui/animations"
 require "character/character"
+require 'game_log'
 
 class Player < Character
     attr_reader :coords
+    attr_reader :prev_coords
     attr_reader :recently_slept
     attr_reader :experience
 
@@ -14,6 +16,8 @@ class Player < Character
         @recently_slept = false
         @recently_slept_move_counter = 0
         @coords = [0,0]
+
+        # @logger = GameLog.new 
     end
 
     def self.generate_new_player
@@ -23,6 +27,8 @@ class Player < Character
     end
 
     def sleep 
+        update_prev_coords_from_current_position()
+
         if (@recently_slept == true)
             puts "You have recently slept, you need to move around a bit before you can sleep again"
             press_any_key_to_continue()
@@ -56,12 +62,52 @@ class Player < Character
         @level += 1
     end
 
-    def set_coords(newX, newY)
-        @coords = [newX, newY]
+    def set_start_position(new_x, new_y)
+        @prev_coords = [new_x, new_y]
+        @coords = [new_x, new_y]
+    end
+
+    def set_coords(new_x, new_y)
+        @coords = [new_x, new_y]
+    end
+
+    def update_prev_coords_from_current_position()
+        x_pos, y_pos = @coords
+        @prev_coords = [x_pos, y_pos]
+    end 
+
+    def has_moved? 
+        prev_x, prev_y = @prev_coords 
+        curr_x, curr_y = @coords 
+
+        if (prev_x == curr_x && prev_y == curr_y)
+            false 
+        else 
+            true
+        end 
+    end 
+
+    def move(map, direction)
+        update_prev_coords_from_current_position()
+
+        case direction
+        when :up
+            move_up(map)
+
+        when :down
+            move_down(map) 
+
+        when :left
+            move_left(map) 
+
+        when :right
+            move_right(map) 
+        end
     end
 
     def move_up(map)
         x_pos, y_pos = @coords
+
         new_y = y_pos - 1 
         if ( map.inbounds?(x_pos, new_y) && map.is_passible?(x_pos, new_y) )
             set_coords(x_pos, new_y)
@@ -71,6 +117,7 @@ class Player < Character
 
     def move_down(map)
         x_pos, y_pos = @coords
+
         new_y = y_pos + 1 
         if ( map.inbounds?(x_pos, new_y) && map.is_passible?(x_pos, new_y) )
             set_coords(x_pos, new_y)
@@ -80,6 +127,7 @@ class Player < Character
 
     def move_left(map)
         x_pos, y_pos = @coords
+
         new_x = x_pos - 1 
         if ( map.inbounds?(new_x, y_pos) && map.is_passible?(new_x, y_pos) )
             set_coords(new_x, y_pos)
@@ -89,6 +137,7 @@ class Player < Character
 
     def move_right(map)
         x_pos, y_pos = @coords
+
         new_x = x_pos + 1 
         if ( map.inbounds?(new_x, y_pos) && map.is_passible?(new_x, y_pos) )
             set_coords(new_x, y_pos)

@@ -44,6 +44,9 @@ class Tile
             when "x"
                 false
 
+            when "M"
+                false
+
             else
                 true
             end    
@@ -53,10 +56,13 @@ class Tile
             case tile_type
             when "g"
                 1
+
             when "m"
-                10
+                12
+
             when "f"
-                5
+                6
+
             else  
                 0
             end
@@ -91,6 +97,10 @@ class Tile
             when "m"
                 ["A^A".colorize("bright_black"),
                  "^A^".colorize("bright_black")]
+                
+            when "M" 
+                ["\u26F0\u26F0\u26F0".colorize("bright_black"),
+                    "\u26F0\u26F0\u26F0".colorize("bright_black")]
 
             when "enemy"
                 ["#?#",

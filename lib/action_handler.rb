@@ -13,19 +13,19 @@ class ActionHandler
             false
 
         when "w"
-            player.move_up(map)
+            player.move(map, :up)
             true
 
         when "s"
-            player.move_down(map)
+            player.move(map, :down)
             true
 
         when "a"
-            player.move_left(map)
+            player.move(map, :left)
             true
 
         when "d"
-            player.move_right (map)
+            player.move(map, :right)
             true
 
         when "sleep"

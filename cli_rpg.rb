@@ -8,6 +8,7 @@ require "ui/display"
 require "action_handler"
 require "battle"
 require "game"
+require 'game_log'
 
 Animations.title_sequence
 press_any_key_to_continue()
@@ -17,7 +18,7 @@ ah = ActionHandler.new
 map = MapGenerator.generate_new_map(1)
 
 player = Player.generate_new_player
-player.set_coords(*map.start_position)
+player.set_start_position(*map.start_position)
 
 action = ""
 while (ah.handle_action(action, player, map) && player.is_alive?)
