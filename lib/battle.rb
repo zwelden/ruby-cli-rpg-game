@@ -1,3 +1,4 @@
+require 'io/console'
 require "helpers/dice"
 require 'helpers/utilities'
 require 'helpers/string_colorize'
@@ -23,9 +24,10 @@ class Battle
         Display.display_all_enemy_info(@enemies)
         Display.player_info(@player)
 
+        STDIN.iflush
         puts "What would you like to do?"
-        puts "Run (r)"
-        puts "Fight (f)"
+        puts "r - Run"
+        puts "f - Fight"
     end 
 
     def get_next_battle_action
@@ -109,7 +111,7 @@ class Battle
             return first_live_enemy 
         end 
 
-        
+        STDIN.iflush
         puts "Which enemy would you like to attack?"
         enemy_number = gets.chomp.to_i
         enemy_number -= 1

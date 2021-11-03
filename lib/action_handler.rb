@@ -1,7 +1,9 @@
+require 'io/console'
 require 'ui/display'
 
 class ActionHandler
     def get_next_action(prompt='> ')
+        STDIN.iflush()
         puts "Enter next action. 'help' for options."
         print prompt
         gets.chomp 

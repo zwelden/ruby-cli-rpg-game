@@ -1,10 +1,10 @@
 class Animations 
 
-    def self.run_animation(keyframes)
+    def self.run_animation(keyframes, frame_sleep)
         keyframes.each do |keyframe|
             system "clear"
             puts keyframe 
-            sleep(0.25)
+            sleep(frame_sleep)
         end 
     end
 
@@ -92,7 +92,7 @@ FRAME8
     *****
 FRAME9
 
-        self.run_animation(keyframes)
+        self.run_animation(keyframes, 0.25)
     end
 
 
@@ -164,7 +164,7 @@ FRAME6
                                  BEGIN!
 FRAME7
 
-        self.run_animation(keyframes)
+        self.run_animation(keyframes, 0.25)
     end
 
 
@@ -317,7 +317,7 @@ FRAME16
       
 FRAME17
 
-        self.run_animation(keyframes)
+        self.run_animation(keyframes, 0.2)
     end
 
 
@@ -387,6 +387,6 @@ FRAME8
 
 FRAME9
 
-        self.run_animation(keyframes)
+        self.run_animation(keyframes, 0.15)
     end
 end

@@ -3,6 +3,7 @@ require 'ui/display'
 require "ui/animations"
 require "character/character"
 require 'game_log'
+require 'io/console'
 
 class Player < Character
     attr_reader :coords
@@ -22,6 +23,7 @@ class Player < Character
     end
 
     def self.generate_new_player
+        STDIN.iflush()
         print "Choose a name for your character: "
         player_name = gets.chomp.strip
         return Player.new(player_name)
