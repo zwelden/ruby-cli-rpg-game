@@ -49,7 +49,7 @@ class Map
         border_corner_bottom_l = "\u255A"
 
         rendered_map = "\n\n\n\n\n"
-        rendered_map << (border_corner_top_l + (border_h * (map_width * 3)) + border_corner_top_r + "\n")
+        rendered_map << (border_corner_top_l + (border_h * (map_width * 4)) + border_corner_top_r + "\n")
 
         @tiles.each_with_index do |row, row_idx|
             map_row_line_1 = ""
@@ -59,8 +59,8 @@ class Map
             
             row.each_with_index do |tile, col_idx|
                 if (col_idx == player_x && row_idx == player_y)
-                    map_row_line_1 << "^X^".colorize("black").colorize("bg_white")
-                    map_row_line_2 << "X^X".colorize("black").colorize("bg_white")
+                    map_row_line_1 << "(oo)".colorize("white").colorize("bold").colorize("bg_blue")
+                    map_row_line_2 << "═╬═!".colorize("white").colorize("bold").colorize("bg_blue")
                 else 
                     d_line_1, d_line_2 = tile.display
                     map_row_line_1 << d_line_1
@@ -74,7 +74,7 @@ class Map
             rendered_map << (map_row_line_2 + "\n")
         end 
 
-        rendered_map << (border_corner_bottom_l + (border_h * (map_width * 3)) + border_corner_bottom_r + "\n")
+        rendered_map << (border_corner_bottom_l + (border_h * (map_width * 4)) + border_corner_bottom_r + "\n")
 
         rendered_map
     end

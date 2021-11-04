@@ -114,44 +114,48 @@ class Tile
         def determine_display(tile_type)
             case tile_type
             when "hero"
-                ["^X^".colorize("black").colorize("bg_white"),
-                 "X^X".colorize("black").colorize("bg_white")]
+                ["^X^X".colorize("black").colorize("bg_white"),
+                 "X^X^".colorize("black").colorize("bg_white")]
+
+            when "r"
+                [" . .".colorize("black").colorize("bg_yellow"),
+                 " . .".colorize("black").colorize("bg_yellow")] 
 
             when "g"
-                 ["\u2591\u2591\u2591",
-                  "\u2591\u2591\u2591"]
+                 ["\u2591\u2591\u2591\u2591",
+                  "\u2591\u2591\u2591\u2591"]
 
             when "w"
-                ["~≈~".colorize("cyan"),
-                 "≈~≈".colorize("cyan")]
+                ["~≈~≈".colorize("cyan"),
+                 "≈~≈~".colorize("cyan")]
 
             when "x"
-                ["\u2588\u2588\u2588".colorize("bright_black"),
-                 "\u2588\u2588\u2588".colorize("bright_black")]
+                ["\u2588\u2588\u2588\u2588".colorize("bright_black"),
+                 "\u2588\u2588\u2588\u2588".colorize("bright_black")]
 
             when "f"
-                ["\u2663\u2663\u2663".colorize("green"),
-                 "\u2663\u2663\u2663".colorize("green")]
+                ["\u2663\u2663\u2663\u2663".colorize("green"),
+                 "\u2663\u2663\u2663\u2663".colorize("green")]
 
             when "h"
-                ["/^\\",
-                 "|_|"]
+                ["/^^\\",
+                 "|__|"]
 
             when "m"
-                ["A^A".colorize("bright_black"),
-                 "^A^".colorize("bright_black")]
+                ["A^A^".colorize("bright_black"),
+                 "^A^A".colorize("bright_black")]
                 
             when "M" 
-                ["\u26F0\u26F0\u26F0".colorize("bright_black"),
-                    "\u26F0\u26F0\u26F0".colorize("bright_black")]
+                ["\u26F0\u26F0\u26F0\u26F0".colorize("bright_black"),
+                 "\u26F0\u26F0\u26F0\u26F0".colorize("bright_black")]
 
             when "enemy"
-                ["#?#",
-                 "?#?"]
+                ["#?#?",
+                 "?#?#"]
 
             else 
-                ["\u2591\u2591\u2591",
-                 "\u2591\u2591\u2591"]
+                ["\u2591\u2591\u2591\u2591",
+                 "\u2591\u2591\u2591\u2591"]
             end
         end 
 

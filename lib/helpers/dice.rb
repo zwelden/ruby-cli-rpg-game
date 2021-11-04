@@ -26,4 +26,8 @@ class Dice
     def self.d4 
         rand(1..4)
     end 
+
+    def self.d2 
+        rand(1..2)
+    end 
 end 
