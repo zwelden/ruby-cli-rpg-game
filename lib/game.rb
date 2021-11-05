@@ -1,7 +1,6 @@
 require "helpers/dice"
 require "character/enemy_generator"
 require 'items/item_generator'
-require 'game_log'
 
 class Game 
     def get_tile_at_player_x_y(player, map)
@@ -30,7 +29,7 @@ class Game
                     item = ItemGenerator.create_random_item()
                     items.push(item)
                 end
-                
+
                 enemy.add_inventory(items)
             end 
         end

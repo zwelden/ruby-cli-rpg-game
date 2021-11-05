@@ -1,5 +1,4 @@
 require 'helpers/utilities'
-require 'game_log'
 
 class Display 
 

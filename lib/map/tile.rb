@@ -118,16 +118,16 @@ class Tile
                  "X^X^".colorize("black").colorize("bg_white")]
 
             when "r"
-                [" . .".colorize("black").colorize("bg_yellow"),
-                 " . .".colorize("black").colorize("bg_yellow")] 
+                ["░▒░▒".colorize("bright_yellow").colorize("bg_black"),
+                 "▒░▒░".colorize("bright_yellow").colorize("bg_black")] 
 
             when "g"
                  ["\u2591\u2591\u2591\u2591",
                   "\u2591\u2591\u2591\u2591"]
 
             when "w"
-                ["~≈~≈".colorize("cyan"),
-                 "≈~≈~".colorize("cyan")]
+                [" ≈~ ".colorize("bright_cyan").colorize("bg_blue"),
+                 "~ ~≈".colorize("bright_cyan").colorize("bg_blue")]
 
             when "x"
                 ["\u2588\u2588\u2588\u2588".colorize("bright_black"),
