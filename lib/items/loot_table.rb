@@ -4,79 +4,92 @@ class LootTable
             name: "Dagger",
             weight: 10,
             type: :weapon,
-            power: 5
+            power: 5,
+            gold_value: 5
         },
         {
             name: "Sword",
             weight: 10,
             type: :weapon,
-            power: 10
+            power: 10,
+            gold_value: 10
         },
         {
             name: "Mace",
             weight: 10,
             type: :weapon,
-            power: 8
+            power: 8,
+            gold_value: 8
         },
         {
             name: "Staff",
             weight: 10,
             type: :weapon,
-            power: 6
+            power: 6,
+            gold_value: 7
         },
         {
             name: "Buckler",
             weight: 10,
             type: :sheld,
-            defense: 3
+            armor: 3,
+            gold_value: 5
         },
         {
             name: "Wood Shield",
             weight: 10,
             type: :sheld,
-            defense: 5
+            armor: 5,
+            gold_value: 10
         },
         {
             name: "Steel Shield",
             weight: 10,
             type: :sheld,
-            defense: 10
+            armor: 10,
+            gold_value: 15
         },
         {
             name: "Minor Healing Potion",
             weight: 10,
             type: :potion,
-            health_points: 10
+            health_points: 10,
+            gold_value: 10
         },
         {
             name: "Major Healing Potion",
             weight: 5,
             type: :potion,
-            health_points: 25
+            health_points: 25,
+            gold_value: 20
         },
         {
             name: "Cloth Tunic",
             weight: 10,
             type: :armor,
-            defense: 2
+            armor: 2,
+            gold_value: 5
         },
         {
             name: "Leather Tunic",
             weight: 10,
             type: :armor,
-            defense: 5
+            armor: 5,
+            sell_gold: 10
         },
         {
             name: "Chain Mail",
             weight: 10,
             type: :armor,
-            defense: 10
+            armor: 10,
+            sell_gold: 15
         },
         {
             name: "Plate Mail",
             weight: 10,
             type: :armor,
-            defense: 15
+            armor: 15,
+            sell_gold: 20
         }
     ]
 

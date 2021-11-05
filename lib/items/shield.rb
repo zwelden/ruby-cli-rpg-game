@@ -1,17 +1,11 @@
-class Shield 
-    attr_reader :name 
-    attr_reader :defense
+require 'items/item'
 
-    def initialize(name, stats)
-        @name = name  
-        @defense = stats[:defense]
-    end 
+class Shield < Item
+    attr_reader :armor
 
-    def equip(character) 
-        # DO STUFF 
-    end
+    def initialize(name, gold_value, stats)
+        super(name, equipable: true, gold_value: gold_value)
 
-    def to_s 
-        @name 
+        @armor = stats[:armor]
     end 
 end

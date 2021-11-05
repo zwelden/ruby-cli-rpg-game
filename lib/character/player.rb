@@ -4,6 +4,8 @@ require "ui/animations"
 require "character/character"
 require 'game_log'
 require 'io/console'
+require 'items/weapon'
+require 'items/armor'
 
 class Player < Character
     attr_reader :coords
@@ -19,6 +21,8 @@ class Player < Character
         @recently_slept_move_counter = 0
         @coords = [0,0]
 
+        @equipped_item = Weapon.new("Rusty Dagger", 3, {power: 3})
+        @worn_item = Armor.new("Old Cloth Tunic", 3, {armor: 3})
         # @logger = GameLog.new 
     end
 

@@ -7,6 +7,8 @@ class Character
     attr_reader :level
     attr_reader :inventory 
     attr_reader :gold
+    attr_reader :equipped_item
+    attr_reader :worn_item
 
     def initialize (name, health, strength, defense, level, inventory: [], gold: 0)
         @name = name
@@ -44,4 +46,69 @@ class Character
     def add_inventory(inventory)
         @inventory.concat(inventory)
     end 
+
+    def equip_item(item)
+        if item.respond_to?(:equipable) && item.equipable
+            currently_equipped_item = @equipped_item
+            @equipped_item = item 
+            
+            if currently_equipped_item != nil 
+                @inventory.push(currently_equipped_item)
+            end 
+        end 
+    end
+
+    def unequip_item 
+        item = @equipped_item
+        if (item.respond_to?(:equippable))
+            @inventory.push(item)
+            @equipped_item = nil
+        end 
+    end
+
+    def wear_item(item)
+        if item.respond_to?(:wearable) && item.wearable
+            currently_worn_item = @worn_item 
+            @worn_item = item 
+
+            if currently_worn_item != nil 
+                @inventory.push(currently_worn_item)
+            end 
+        end 
+    end 
+
+    def remove_worn_item 
+        item = @worn_item
+        if (item.respond_to?(:wearable))
+            @inventory.push(item)
+            @worn_item = nil
+        end 
+    end 
+
+    def get_attack_power 
+        attack_power = 0
+        if (@equipped_item != nil && @equipped_item.respond_to?(:power))
+            attack_power += @equipped_item.power
+        end 
+
+        if (@worn_item && @worn_item.respond_to?(:power))
+            attack_power += @worn_item.power
+        end 
+
+        attack_power 
+    end 
+
+    def get_armor 
+        armor = 0 
+        if (@equipped_item && @equipped_item.respond_to?(:armor))
+            armor += @equipped_item.armor
+        end 
+
+        if (@worn_item && @worn_item.respond_to?(:armor))
+            armor += @worn_item.armor
+        end 
+
+        armor 
+    end
+
 end

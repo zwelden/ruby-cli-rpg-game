@@ -1,17 +1,11 @@
-class Weapon 
-    attr_reader :name 
+require 'items/item'
+
+class Weapon < Item
     attr_reader :power
 
-    def initialize(name, stats)
-        @name = name 
+    def initialize(name, gold_value, stats)
+        super(name, equipable: true, gold_value: 0)
+
         @power = stats[:power]
-    end 
-
-    def equip(character)
-        #  DO STUFF
-    end 
-
-    def to_s 
-        @name 
     end 
 end

@@ -6,19 +6,19 @@ require 'items/loot_table'
 
 class ItemGenerator 
 
-    def self.create_item(type, name, stats)
+    def self.create_item(type, name, gold_value, stats)
         case type
         when :armor 
-            Armor.new(name, stats)
+            Armor.new(name, gold_value, stats)
         
         when :potion 
-            Potion.new(name, stats)
+            Potion.new(name, gold_value, stats)
 
         when :shield 
-            Shield.new(name, stats)
+            Shield.new(name, gold_value, stats)
 
         when :weapon 
-            Weapon.new(name, stats)
+            Weapon.new(name, gold_value, stats)
             
         else
             nil
@@ -29,6 +29,7 @@ class ItemGenerator
         item_detail = LootTable.get_random_item 
         type = item_detail[:type]
         name = item_detail[:name]
-        self.create_item(type, name, item_detail)
+        gold = item_detail[:gold_value]
+        self.create_item(type, name, gold, item_detail)
     end 
 end 

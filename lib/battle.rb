@@ -35,10 +35,11 @@ class Battle
         gets.chomp
     end
 
-    def calculate_damage(attacker, attacked)
+    def calculate_damage(attacker, defender)
         is_crit = (Dice.d20 == 20)
-        attack = Dice.d8 + attacker.strength 
-        defense = Dice.d8 + attacked.defense 
+
+        attack = Dice.d8 + attacker.strength + attacker.get_attack_power
+        defense = Dice.d8 + defender.defense + defender.get_armor
 
         if (is_crit)
             attack *= 2 
@@ -50,16 +51,18 @@ class Battle
             damage = 0 
         end 
 
+        [damage, is_crit] 
+    end 
+
+    def display_damage_done(damage, is_crit, attacker, defender)
         if (damage > 0)
             if (is_crit) 
                 puts "#{attacker.name} Cits!"
             end 
-            puts "#{attacker.name} does #{damage} damage to #{attacked.name}"
+            puts "#{attacker.name} does #{damage} damage to #{defender.name}"
         else 
-            puts "#{attacker.name} misses #{attacked.name}"
+            puts "#{attacker.name} misses #{defender.name}"
         end 
-
-        damage 
     end 
 
     def run_away 
@@ -67,7 +70,8 @@ class Battle
 
         @enemies.each do |enemy|
             if (enemy.is_alive? && @player.is_alive? && Dice.d10 >= 5)
-                damage_taken = calculate_damage(enemy, @player)
+                damage_taken, is_crit = calculate_damage(enemy, @player)
+                display_damage_done(damage, is_crit, enemy, @player)
                 total_damage += damage_taken
                 @player.reduce_health(damage_taken)
             elsif (@player.is_alive?)
@@ -138,8 +142,11 @@ class Battle
     end
         
     def attack_enemy(enemy)
-        damage = calculate_damage(@player, enemy)
+        damage, is_crit = calculate_damage(@player, enemy)
         enemy.reduce_health(damage)
+        system "clear"
+        Display.display_all_enemy_info(@enemies)
+        display_damage_done(damage, is_crit, @player, enemy)
 
         if (enemy.is_alive? == false)
             puts "#{@player.name} kills #{enemy.name}"
@@ -151,7 +158,8 @@ class Battle
 
         @enemies.each do |enemy|
             if (enemy.is_alive? && @player.is_alive?)
-                damage_taken = calculate_damage(enemy, @player)
+                damage_taken, is_crit = calculate_damage(enemy, @player)
+                display_damage_done(damage_taken, is_crit, enemy, @player)
                 @player.reduce_health(damage_taken)
             end
         end 
@@ -180,7 +188,9 @@ class Battle
 
         @enemies.each do |enemy|
             gold += enemy.gold 
-            inventory.concat(enemy.inventory)
+            if (enemy.inventory.length > 0)
+                inventory.concat(enemy.inventory)
+            end 
         end 
 
         [gold, inventory]
