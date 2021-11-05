@@ -71,7 +71,7 @@ class Battle
         @enemies.each do |enemy|
             if (enemy.is_alive? && @player.is_alive? && Dice.d10 >= 5)
                 damage_taken, is_crit = calculate_damage(enemy, @player)
-                display_damage_done(damage, is_crit, enemy, @player)
+                display_damage_done(damage_taken, is_crit, enemy, @player)
                 total_damage += damage_taken
                 @player.reduce_health(damage_taken)
             elsif (@player.is_alive?)

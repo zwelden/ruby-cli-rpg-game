@@ -44,7 +44,9 @@ class Character
     end 
 
     def add_inventory(inventory)
-        @inventory.concat(inventory)
+        if (inventory.length > 0)
+            @inventory.concat(inventory)
+        end
     end 
 
     def equip_item(item)

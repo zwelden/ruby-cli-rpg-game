@@ -64,7 +64,16 @@ class Player < Character
         update_prev_coords_from_current_position()
 
         system "clear"
-        Display.show_inventory(self)
+        Display.player_inventory(self)
+        press_any_key_to_continue()
+    end 
+
+    def show_full_detail 
+        update_prev_coords_from_current_position()
+
+        system "clear"
+        Display.full_player_info(self)
+        press_any_key_to_continue()
     end 
 
     def increase_experience(amount)

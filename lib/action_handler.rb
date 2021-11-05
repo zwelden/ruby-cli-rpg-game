@@ -34,6 +34,10 @@ class ActionHandler
             player.show_inventory()
             true
 
+        when "c"
+            player.show_full_detail() 
+            true
+
         when "sleep"
             player.sleep 
             true

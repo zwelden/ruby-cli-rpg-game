@@ -1,3 +1,4 @@
+require 'game_log'
 class LootTable 
     LOOT_TABLE = [
         {
@@ -31,21 +32,21 @@ class LootTable
         {
             name: "Buckler",
             weight: 10,
-            type: :sheld,
+            type: :shield,
             armor: 3,
             gold_value: 5
         },
         {
             name: "Wood Shield",
             weight: 10,
-            type: :sheld,
+            type: :shield,
             armor: 5,
             gold_value: 10
         },
         {
             name: "Steel Shield",
             weight: 10,
-            type: :sheld,
+            type: :shield,
             armor: 10,
             gold_value: 15
         },
@@ -101,7 +102,7 @@ class LootTable
                 loot_roll_arr.push(item_idx)
             end 
         end 
-        
+
         loot_roll_arr 
     end 
 
