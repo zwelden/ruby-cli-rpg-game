@@ -7,8 +7,10 @@ class Character
     attr_reader :level
     attr_reader :inventory 
     attr_reader :gold
-    attr_reader :equipped_item
-    attr_reader :worn_item
+    attr_reader :weapon_slot
+    attr_reader :shield_slot
+    attr_reader :body_slot
+    attr_reader :leg_slot
 
     def initialize (name, health, strength, defense, level, inventory: [], gold: 0)
         @name = name
@@ -50,67 +52,81 @@ class Character
     end 
 
     def equip_item(item)
-        if item.respond_to?(:equipable) && item.equipable
-            currently_equipped_item = @equipped_item
-            @equipped_item = item 
+        current_item = nil
+
+        case item.type
+        when :shield
+            current_item = @shield_slot
+            @shield_slot = item 
+
+        when :weapon
+            current_item = @weapon_slot
+            @weapon_slot = item 
+
+        when :armor
+            armor_type = item.armor_type
+
+            case armor_type
+            when :body 
+                current_item = @body_slot
+                @body_slot = item 
+
+            when :legs
+                current_item = @leg_slot
+                @leg_slot = item 
+  
+            end
+        end
+
+        if current_item != nil 
+            @inventory.push(current_item)
+        end 
+    end
+
+    def unequip_item(slot)
+        case slot
+        when :shield_slot
+            item = @shield_slot
+            @shield_slot = nil
+
+        when :weapon_slot
+            item = @weapon_slot
+            @weapon_slot = nil
+
+        when :body_slot
+            item = @body_slot
+            @body_slot = nil
+
+        when :leg_slot
+            item = @leg_slot
+            @leg_slot = nil
             
-            if currently_equipped_item != nil 
-                @inventory.push(currently_equipped_item)
-            end 
-        end 
+        end
+
+        if (item != nil)
+            @inventory.push(item)
+        end
     end
 
-    def unequip_item 
-        item = @equipped_item
-        if (item.respond_to?(:equippable))
-            @inventory.push(item)
-            @equipped_item = nil
-        end 
-    end
+    def get_equipped_stat_value(stat)
+        items = [@shield_slot, @weapon_slot, @body_slot, @leg_slot]
+        stat_value = 0
 
-    def wear_item(item)
-        if item.respond_to?(:wearable) && item.wearable
-            currently_worn_item = @worn_item 
-            @worn_item = item 
-
-            if currently_worn_item != nil 
-                @inventory.push(currently_worn_item)
+        items.each do |item|
+            if (item != nil && item.respond_to?(stat))
+                stat_value += item.__send__(stat)
             end 
-        end 
-    end 
+        end
 
-    def remove_worn_item 
-        item = @worn_item
-        if (item.respond_to?(:wearable))
-            @inventory.push(item)
-            @worn_item = nil
-        end 
+        stat_value 
     end 
 
     def get_attack_power 
-        attack_power = 0
-        if (@equipped_item != nil && @equipped_item.respond_to?(:power))
-            attack_power += @equipped_item.power
-        end 
-
-        if (@worn_item && @worn_item.respond_to?(:power))
-            attack_power += @worn_item.power
-        end 
-
-        attack_power 
+        get_equipped_stat_value(:power)
     end 
 
     def get_armor 
-        armor = 0 
-        if (@equipped_item && @equipped_item.respond_to?(:armor))
-            armor += @equipped_item.armor
-        end 
-
-        if (@worn_item && @worn_item.respond_to?(:armor))
-            armor += @worn_item.armor
-        end 
-
-        armor 
+        get_equipped_stat_value(:armor)
     end
 
 end

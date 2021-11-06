@@ -59,8 +59,9 @@ class Map
             
             row.each_with_index do |tile, col_idx|
                 if (col_idx == player_x && row_idx == player_y)
-                    map_row_line_1 << "(oo)".colorize("white").colorize("bold").colorize("bg_blue")
-                    map_row_line_2 << "═╬═!".colorize("white").colorize("bold").colorize("bg_blue")
+                    d_line_1, d_line_2 = player.tile.display
+                    map_row_line_1 << d_line_1
+                    map_row_line_2 << d_line_2
                 else 
                     d_line_1, d_line_2 = tile.display
                     map_row_line_1 << d_line_1

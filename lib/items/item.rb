@@ -1,15 +1,11 @@
 class Item 
     attr_reader :name 
-    attr_reader :equipable 
-    attr_reader :wearable 
-    attr_reader :consumable 
+    attr_reader :type
     attr_reader :gold_value
 
-    def initialize(name, gold_value: 0, equipable: false, wearable: false, consumable: false)
+    def initialize(name, type, gold_value: 0)
         @name = name 
-        @equipable = equipable 
-        @wearable = wearable 
-        @consumable = consumable
+        @type = type
         @gold_value = gold_value
     end 
 

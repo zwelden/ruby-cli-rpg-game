@@ -113,9 +113,9 @@ class Tile
 
         def determine_display(tile_type)
             case tile_type
-            when "hero"
-                ["^X^X".colorize("black").colorize("bg_white"),
-                 "X^X^".colorize("black").colorize("bg_white")]
+            when "player"
+                ["(oo)".colorize("white").colorize("bold").colorize("bg_blue"),
+                 "═╬═!".colorize("white").colorize("bold").colorize("bg_blue")]\
 
             when "r"
                 ["░▒░▒".colorize("bright_yellow").colorize("bg_black"),
@@ -126,8 +126,8 @@ class Tile
                   "\u2591\u2591\u2591\u2591"]
 
             when "w"
-                [" ≈~ ".colorize("bright_cyan").colorize("bg_blue"),
-                 "~ ~≈".colorize("bright_cyan").colorize("bg_blue")]
+                ["~≈~ ".colorize("bright_cyan").colorize("bg_blue"),
+                 " ≈~≈".colorize("bright_cyan").colorize("bg_blue")]
 
             when "x"
                 ["\u2588\u2588\u2588\u2588".colorize("bright_black"),
@@ -148,10 +148,6 @@ class Tile
             when "M" 
                 ["\u26F0\u26F0\u26F0\u26F0".colorize("bright_black"),
                  "\u26F0\u26F0\u26F0\u26F0".colorize("bright_black")]
-
-            when "enemy"
-                ["#?#?",
-                 "?#?#"]
 
             else 
                 ["\u2591\u2591\u2591\u2591",

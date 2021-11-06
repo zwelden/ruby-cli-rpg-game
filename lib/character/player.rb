@@ -2,16 +2,18 @@ require "helpers/utilities"
 require 'ui/display'
 require "ui/animations"
 require "character/character"
-require 'game_log'
 require 'io/console'
 require 'items/weapon'
 require 'items/armor'
+require 'map/tile'
+require 'game_log'
 
 class Player < Character
     attr_reader :coords
     attr_reader :prev_coords
     attr_reader :recently_slept
     attr_reader :experience
+    attr_reader :tile
 
     def initialize(name)
         super(name, 50, 6, 3, 1, gold: 10)
@@ -20,9 +22,11 @@ class Player < Character
         @recently_slept = false
         @recently_slept_move_counter = 0
         @coords = [0,0]
+        @tile = Tile.new('player')
 
-        @equipped_item = Weapon.new("Rusty Dagger", 3, {power: 3})
-        @worn_item = Armor.new("Old Cloth Tunic", 3, {armor: 3})
+        @weapon_slot = Weapon.new("Rusty Dagger", 2, {power: 1})
+        @body_slot = Armor.new("Old Cloth Tunic", 2, {armor: 1, armor_type: :body})
+        @leg_slot = Armor.new("Old Cloth Pants", 2, {armor: 1, armor_type: :legs})
         # @logger = GameLog.new 
     end
 

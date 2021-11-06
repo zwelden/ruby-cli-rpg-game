@@ -39,7 +39,7 @@ class Battle
         is_crit = (Dice.d20 == 20)
 
         attack = Dice.d8 + attacker.strength + attacker.get_attack_power
-        defense = Dice.d8 + defender.defense + defender.get_armor
+        defense = Dice.d6 + defender.defense + defender.get_armor
 
         if (is_crit)
             attack *= 2 

@@ -69,6 +69,7 @@ class LootTable
             weight: 10,
             type: :armor,
             armor: 2,
+            armor_type: :body,
             gold_value: 5
         },
         {
@@ -76,20 +77,55 @@ class LootTable
             weight: 10,
             type: :armor,
             armor: 5,
+            armor_type: :body,
             sell_gold: 10
         },
         {
             name: "Chain Mail",
-            weight: 10,
+            weight: 5,
             type: :armor,
             armor: 10,
+            armor_type: :body,
             sell_gold: 15
         },
         {
             name: "Plate Mail",
-            weight: 10,
+            weight: 3,
             type: :armor,
             armor: 15,
+            armor_type: :body,
+            sell_gold: 20
+        },
+        {
+            name: "Cloth Pants",
+            weight: 10,
+            type: :armor,
+            armor: 2,
+            armor_type: :legs,
+            gold_value: 5
+        },
+        {
+            name: "Leather Pants",
+            weight: 10,
+            type: :armor,
+            armor: 5,
+            armor_type: :legs,
+            sell_gold: 10
+        },
+        {
+            name: "Chain Mail Pants",
+            weight: 5,
+            type: :armor,
+            armor: 10,
+            armor_type: :legs,
+            sell_gold: 15
+        },
+        {
+            name: "Plate Mail Pants",
+            weight: 3,
+            type: :armor,
+            armor: 15,
+            armor_type: :legs,
             sell_gold: 20
         }
     ]
