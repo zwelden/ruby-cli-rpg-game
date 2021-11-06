@@ -62,6 +62,10 @@ class Tile
         {gold: gold, items: items}
     end 
 
+    def is_path_to_new_map? 
+        self.type == "R"
+    end 
+
     private
         def determine_passibility(tile_type)
             case tile_type
@@ -72,6 +76,9 @@ class Tile
                 false
 
             when "M"
+                false
+
+            when "e"
                 false
 
             else
@@ -120,6 +127,16 @@ class Tile
             when "r"
                 ["░▒░▒".colorize("bright_yellow").colorize("bg_black"),
                  "▒░▒░".colorize("bright_yellow").colorize("bg_black")] 
+            
+            when "R"
+                tile_a = "░".colorize("bright_red")
+                tile_b = "▒".colorize("bright_yellow")
+                ["#{tile_a}#{tile_b}#{tile_a}#{tile_b}".colorize("bg_black"),
+                 "#{tile_b}#{tile_a}#{tile_b}#{tile_a}".colorize("bg_black")] 
+
+            when "e"
+                ["    ".colorize("bright_black"),
+                 "    ".colorize("bright_black")] 
 
             when "g"
                  ["\u2591\u2591\u2591\u2591",
@@ -128,6 +145,10 @@ class Tile
             when "w"
                 ["~≈~ ".colorize("bright_cyan").colorize("bg_blue"),
                  " ≈~≈".colorize("bright_cyan").colorize("bg_blue")]
+
+            when "W"
+                ["╤╤╤╤".colorize("bright_yellow").colorize("bg_blue"),
+                 "╧╧╧╧".colorize("bright_yellow").colorize("bg_blue")]
 
             when "x"
                 ["\u2588\u2588\u2588\u2588".colorize("bright_black"),

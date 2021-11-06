@@ -97,4 +97,21 @@ class Game
 
         false
     end 
+
+    def check_for_new_map_load(player, map)
+        tile = get_tile_at_player_x_y(player, map)
+
+        if (tile.is_path_to_new_map?)
+            return true 
+        end 
+    end 
+
+    def get_new_map_zone_to_load(player, map)
+        x_pos, y_pos = player.coords 
+
+        new_map_key = "#{x_pos}_#{y_pos}"
+        new_map_zone = map.gateways[new_map_key]
+        
+        new_map_zone 
+    end 
 end

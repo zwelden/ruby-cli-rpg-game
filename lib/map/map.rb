@@ -4,11 +4,13 @@ require 'helpers/string_colorize'
 class Map
     attr_reader :name 
     attr_reader :start_position
+    attr_reader :gateways
 
-    def initialize(name, tiles, start_position)
+    def initialize(name, tiles, start_position, map_gateways)
         @name = name
         @tiles = tiles
         @start_position = start_position
+        @gateways = map_gateways
     end 
 
     def inbounds?(x, y) 
@@ -27,6 +29,11 @@ class Map
     def is_passible?(x, y)
         tile = @tiles[y][x]
         tile.passible 
+    end
+
+    def is_path_to_new_map?(x, y)
+        tile = @tiles[y][x]
+        tile.is_path_to_new_map? 
     end
 
     def get_tile(x, y)
@@ -48,7 +55,7 @@ class Map
         border_corner_bottom_r = "\u255D"
         border_corner_bottom_l = "\u255A"
 
-        rendered_map = "\n\n\n\n\n"
+        rendered_map = "\n"
         rendered_map << (border_corner_top_l + (border_h * (map_width * 4)) + border_corner_top_r + "\n")
 
         @tiles.each_with_index do |row, row_idx|

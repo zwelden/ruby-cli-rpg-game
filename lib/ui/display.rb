@@ -175,16 +175,6 @@ class Display
         press_any_key_to_continue()
     end
 
-    # def self.show_inventory(player)
-    #     puts "<><> INVENTORY <><>"
-
-    #     player.inventory.each do |item|
-    #         puts "- #{item}"
-    #     end 
-    #     puts "\n"
-    #     press_any_key_to_continue()
-    # end
-
     def self.treasure_found 
         display_str = <<~END 
                     YOU FOUND TREASURE!
@@ -197,11 +187,11 @@ class Display
              /.'`;|:::::::'      ||_
             ||   ||::::::'     _.;._'-._
             ||   ||:::::'  _.-!oo @.!-._'-.
-            \'.  ||:::::.-!()oo @!()@.-'_.|
-             '.'-;|:.-'.&$@.& ()$%-'o.'\U||
+            \\'.  ||:::::.-!()oo @!()@.-'_.|
+             '.'-;|:.-'.&$@.& ()$%-'o.'\\U||
                `>'-.!@%()@'@_%-'_.-o _.|'||
                 ||-._'-.@.-'_.-' _.-o  |'||
-                ||=[ '-._.-\U/.-'    o |'||
+                ||=[ '-._.-\\U/.-'    o |'||
                 || '-.]=|| |'|      o  |'||
                 ||      || |'|        _| ';
                 ||      || |'|    _.-'_.-'

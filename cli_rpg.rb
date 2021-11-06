@@ -22,6 +22,19 @@ player.set_start_position(*map.start_position)
 
 action = ""
 while (ah.handle_action(action, player, map) && player.is_alive?)
+    load_new_map = game.check_for_new_map_load(player, map)
+
+    if (load_new_map)
+        new_map_info = game.get_new_map_zone_to_load(player, map)
+        map_zone = new_map_info[:zone]
+        start_coords = new_map_info[:entry_coords]
+        map = MapGenerator.generate_new_map(map_zone)
+
+        system "clear"
+        puts map.render_map(player)
+        player.set_start_position(*start_coords)
+    end 
+
     has_enemies = game.check_for_battle(player, map)
     has_treasure = game.check_for_treasure(player, map)
 
