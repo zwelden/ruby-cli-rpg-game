@@ -161,9 +161,13 @@ class Tile
                 ["~≈~ ".colorize("bright_cyan").colorize("bg_blue"),
                  " ≈~≈".colorize("bright_cyan").colorize("bg_blue")]
 
-            when "W"
+            when "b"
                 ["╤╤╤╤".colorize("bright_yellow").colorize("bg_blue"),
                  "╧╧╧╧".colorize("bright_yellow").colorize("bg_blue")]
+
+            when "B"
+                ["╟──╢".colorize("bright_yellow").colorize("bg_blue"),
+                 "╟──╢".colorize("bright_yellow").colorize("bg_blue")]
 
             when "x"
                 ["\u2588\u2588\u2588\u2588".colorize("bright_black"),
