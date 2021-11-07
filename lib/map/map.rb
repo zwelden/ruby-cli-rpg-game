@@ -41,7 +41,10 @@ class Map
     end
 
     def render_map(player)
-        player_x, player_y = player.coords
+        player_x, player_y = [-1, -1]
+        if (player.respond_to?(:coords))
+            player_x, player_y = player.coords
+        end 
         map_width = @tiles[0].length
         win_height, win_width = IO.console.winsize
         lpad = (win_width - (map_width + 2)) / 2 

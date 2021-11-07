@@ -36,7 +36,7 @@ class MapGenerator
             },
             '9_15' => {
                 zone: 4,
-                entry_coords: [2,0]
+                entry_coords: [2,1]
             }
         }
     }

@@ -186,8 +186,8 @@ class Tile
                  ".  .".colorize("bright_black")] 
 
             when "Y"
-                ["__✝_",
-                 "│__│"]
+                ["__✝_".colorize("red"),
+                 "│__│".colorize("red")]
 
             when "c"
                 ["¿‼$?".colorize("red").colorize("bg_yellow"),
