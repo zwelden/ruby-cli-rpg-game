@@ -28,7 +28,7 @@ class MapGenerator
         map_gateways: {
             '0_2' => {
                 zone: 3,
-                entry_coords: [0,0]
+                entry_coords: [21,2]
             },
             '17_0' => {
                 zone: 2,
@@ -36,7 +36,7 @@ class MapGenerator
             },
             '9_15' => {
                 zone: 4,
-                entry_coords: [0,0]
+                entry_coords: [2,0]
             }
         }
     }
@@ -72,26 +72,50 @@ class MapGenerator
 
     MAP_3 = {
         tiles: [
-            ["f", "f", "f", "f"],
-            ["f", "f", "f", "f"],
-            ["f", "f", "f", "f"],
-            ["f", "f", "f", "f"]
+            ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "e", "e", "e", "r", "R"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "T", "t", "t", "t", "y", "t", "t", "t", "x", "e", "e", "r", "r", "e"],
+            ["e", "e", "e", "e", "e", "x", "x", "x", "x", "t", "t", "T", "t", "t", "g", "t", "t", "x", "e", "e", "r", "e", "e"],
+            ["e", "e", "e", "e", "e", "x", "t", "T", "t", "g", "t", "t", "t", "t", "t", "t", "t", "x", "r", "r", "r", "e", "e"],
+            ["e", "e", "e", "e", "x", "x", "t", "y", "t", "t", "y", "x", "t", "T", "t", "r", "r", "r", "r", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "x", "c", "t", "g", "T", "t", "t", "x", "t", "t", "t", "t", "t", "x", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "x", "x", "t", "t", "t", "t", "t", "x", "T", "t", "t", "T", "t", "x", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "x", "t", "t", "t", "y", "t", "t", "t", "t", "y", "t", "g", "x", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "x", "x", "x", "x", "t", "T", "t", "g", "t", "t", "t", "t", "x", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "t", "t", "t", "t", "T", "t", "Y", "t", "x", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "t", "t", "t", "t", "t", "t", "t", "t", "x", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"],
+            ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"]
         ],
         map_name: "Zone 3",
         start_position: [2,2],
-        map_gateways: {}
+        map_gateways: {
+            '22_2' => {
+                zone: 1,
+                entry_coords: [1,2]
+            }
+        }
     }
 
     MAP_4 = {
         tiles: [
+            ["e", "e", "R", "e"],
+            ["m", "m", "r", "m"],
             ["m", "m", "m", "m"],
             ["m", "m", "m", "m"],
             ["m", "m", "m", "m"],
-            ["m", "m", "m", "m"]
+
         ],
         map_name: "Zone 4",
         start_position: [3,3],
-        map_gateways: {}
+        map_gateways: {
+            '2_0' => {
+                zone: 1,
+                entry_coords: [9,14]
+            }
+        }
     }
 
     def self.generate_map_tiles(tile_detail)

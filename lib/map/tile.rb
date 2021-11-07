@@ -97,6 +97,12 @@ class Tile
             when "f"
                 6
 
+            when "t"
+                25
+
+            when "T"
+                25
+
             else  
                 0
             end
@@ -112,6 +118,15 @@ class Tile
 
             when "f"
                 3
+
+            when "t"
+                10
+
+            when "T"
+                10
+
+            when "c"
+                100
 
             else  
                 0
@@ -157,6 +172,26 @@ class Tile
             when "f"
                 ["\u2663\u2663\u2663\u2663".colorize("green"),
                  "\u2663\u2663\u2663\u2663".colorize("green")]
+
+            when "t"
+                [" ╬ ✝".colorize("bright_black"),
+                 "✝ ╬ ".colorize("bright_black")]
+
+            when "T"
+                [" ✝. ",
+                 " [] "]
+            
+            when "y" 
+                [" .  ".colorize("bright_black"),
+                 ".  .".colorize("bright_black")] 
+
+            when "Y"
+                ["__✝_",
+                 "│__│"]
+
+            when "c"
+                ["¿‼$?".colorize("red").colorize("bg_yellow"),
+                 "♦£¥$".colorize("red").colorize("bg_yellow")]
 
             when "h"
                 ["/^^\\",
