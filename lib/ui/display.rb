@@ -183,6 +183,7 @@ class Display
             │ e - equip item                                    │
             │ u - unequip item                                  │
             │ c - use item                                      │
+            │ d - drop item                                     │
             ╘═══════════════════════════════════════════════════╛
         
         END

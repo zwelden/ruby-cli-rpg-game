@@ -10,6 +10,6 @@ class Potion < Item
     end 
 
     def consume(character) 
-        # DO STUFF 
+        character.increase_health(@health_points)
     end 
 end
