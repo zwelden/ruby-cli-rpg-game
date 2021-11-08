@@ -1,0 +1,53 @@
+{
+    "dagger_1": { 
+        "weight": 10 
+    },
+    "sword_1": {
+        "weight": 10
+    },
+    "mace_1": {
+        "weight": 10
+    },
+    "staff_1": {
+        "weight": 10
+    },
+    "shield_1": {
+        "weight": 10
+    },
+    "shield_2": {
+        "weight": 10
+    },
+    "shield_3": {
+        "weight": 10
+    },
+    "healing_potion_1": {
+        "weight": 30
+    },
+    "healing_potion_2": {
+        "weight": 5
+    },
+    "body_armor_1": {
+        "weight": 10
+    },
+    "body_armor_2": {
+        "weight": 10
+    },
+    "body_armor_3": {
+        "weight": 5
+    },
+    "body_armor_4": {
+        "weight": 3
+    },
+    "leg_armor_1": {
+        "weight": 10
+    },
+    "leg_armor_2": {
+        "weight": 10
+    },
+    "leg_armor_3": {
+        "weight": 5
+    },
+    "leg_armor_4": {
+        "weight": 3
+    }
+}

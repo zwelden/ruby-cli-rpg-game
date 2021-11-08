@@ -1,4 +1,4 @@
-require 'items/item'
+require 'item/item'
 
 class Weapon < Item
     attr_reader :power

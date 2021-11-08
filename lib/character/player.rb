@@ -3,8 +3,8 @@ require 'ui/display'
 require "ui/animations"
 require "character/character"
 require 'io/console'
-require 'items/weapon'
-require 'items/armor'
+require 'item/weapon'
+require 'item/armor'
 require 'map/tile'
 require 'game_log'
 
@@ -25,8 +25,8 @@ class Player < Character
         @tile = Tile.new('player')
 
         @weapon_slot = Weapon.new("Rusty Dagger", 2, {power: 1})
-        @body_slot = Armor.new("Old Cloth Tunic", 2, {armor: 1, armor_type: :body})
-        @leg_slot = Armor.new("Old Cloth Pants", 2, {armor: 1, armor_type: :legs})
+        @body_slot = Armor.new("Old Cloth Tunic", 2, {armor: 1, armor_type: "body"})
+        @leg_slot = Armor.new("Old Cloth Pants", 2, {armor: 1, armor_type: "legs"})
         # @logger = GameLog.new 
     end
 

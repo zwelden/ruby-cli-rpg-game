@@ -1,6 +1,6 @@
 require "helpers/dice"
 require "character/enemy_generator"
-require 'items/item_generator'
+require 'item/item_generator'
 
 class Game 
     def get_tile_at_player_x_y(player, map)

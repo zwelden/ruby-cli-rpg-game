@@ -1,4 +1,4 @@
-require 'items/item'
+require 'item/item'
 
 class Potion < Item
     attr_reader :health_points 

@@ -1,0 +1,112 @@
+{
+    "dagger_1": {
+        "name": "Dagger",
+        "type": "weapon",
+        "power": 2,
+        "gold_value": 5
+    },
+    "sword_1": {
+        "name": "Sword",
+        "type": "weapon",
+        "power": 5,
+        "gold_value": 10
+    },
+    "mace_1": {
+        "name": "Mace",
+        "type": "weapon",
+        "power": 4,
+        "gold_value": 8
+    },
+    "staff_1": {
+        "name": "Staff",
+        "type": "weapon",
+        "power": 3,
+        "gold_value": 7
+    },
+    "shield_1": {
+        "name": "Buckler",
+        "type": "shield",
+        "armor": 1,
+        "gold_value": 5
+    },
+    "shield_2": {
+        "name": "Wood Shield",
+        "type": "shield",
+        "armor": 2,
+        "gold_value": 10
+    },
+    "shield_3": {
+        "name": "Steel Shield",
+        "type": "shield",
+        "armor": 3,
+        "gold_value": 15
+    },
+    "healing_potion_1": {
+        "name": "Minor Healing Potion",
+        "type": "potion",
+        "health_points": 10,
+        "gold_value": 10
+    },
+    "healing_potion_2": {
+        "name": "Major Healing Potion",
+        "type": "potion",
+        "health_points": 25,
+        "gold_value": 20
+    },
+    "body_armor_1": {
+        "name": "Cloth Tunic",
+        "type": "armor",
+        "armor": 2,
+        "armor_type": "body",
+        "gold_value": 5
+    },
+    "body_armor_2": {
+        "name": "Leather Tunic",
+        "type": "armor",
+        "armor": 3,
+        "armor_type": "body",
+        "gold_value": 10
+    },
+    "body_armor_3": {
+        "name": "Chain Mail",
+        "type": "armor",
+        "armor": 4,
+        "armor_type": "body",
+        "gold_value": 15
+    },
+    "body_armor_4": {
+        "name": "Plate Mail",
+        "type": "armor",
+        "armor": 5,
+        "armor_type": "body",
+        "gold_value": 20
+    },
+    "leg_armor_1": {
+        "name": "Cloth Pants",
+        "type": "armor",
+        "armor": 2,
+        "armor_type": "legs",
+        "gold_value": 5
+    },
+    "leg_armor_2": {
+        "name": "Leather Pants",
+        "type": "armor",
+        "armor": 3,
+        "armor_type": "legs",
+        "gold_value": 10
+    },
+    "leg_armor_3": {
+        "name": "Chain Mail Pants",
+        "type": "armor",
+        "armor": 4,
+        "armor_type": "legs",
+        "gold_value": 15
+    },
+    "leg_armor_4": {
+        "name": "Plate Mail Pants",
+        "type": "armor",
+        "armor": 5,
+        "armor_type": "legs",
+        "gold_value": 20
+    }
+}

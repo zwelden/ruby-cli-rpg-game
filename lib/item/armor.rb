@@ -1,4 +1,4 @@
-require 'items/item'
+require 'item/item'
 
 class Armor < Item
     attr_reader :armor 

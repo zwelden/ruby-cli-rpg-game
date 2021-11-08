@@ -9,6 +9,7 @@ require "action_handler"
 require "battle"
 require "game"
 require 'game_log'
+require 'item/item_table'
 
 Animations.title_sequence
 press_any_key_to_continue()
@@ -16,6 +17,14 @@ press_any_key_to_continue()
 game = Game.new 
 ah = ActionHandler.new
 map = MapGenerator.generate_new_map(1)
+it = ItemTable.new
+
+puts it.items.inspect 
+press_any_key_to_continue()
+
+puts it.get_item_info_by_key(:sword_1).inspect 
+press_any_key_to_continue()
+
 
 player = Player.generate_new_player
 player.set_start_position(*map.start_position)

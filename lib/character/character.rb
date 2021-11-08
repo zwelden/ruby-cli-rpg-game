@@ -101,12 +101,12 @@ class Character
             armor_type = item.armor_type
 
             case armor_type
-            when :body 
+            when "body"
                 current_item = @body_slot
                 @body_slot = item 
                 equipped = true
 
-            when :legs
+            when "legs"
                 current_item = @leg_slot
                 @leg_slot = item 
                 equipped = true
