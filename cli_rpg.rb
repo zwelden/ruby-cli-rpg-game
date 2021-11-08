@@ -9,7 +9,6 @@ require "action_handler"
 require "battle"
 require "game"
 require 'game_log'
-require 'item/item_table'
 
 Animations.title_sequence
 press_any_key_to_continue()
@@ -17,23 +16,14 @@ press_any_key_to_continue()
 game = Game.new 
 ah = ActionHandler.new
 map = MapGenerator.generate_new_map(1)
-it = ItemTable.new
-
-puts it.items.inspect 
-press_any_key_to_continue()
-
-puts it.get_item_info_by_key(:sword_1).inspect 
-press_any_key_to_continue()
-
 
 player = Player.generate_new_player
 player.set_start_position(*map.start_position)
 
 action = ""
 while (ah.handle_action(action, player, map) && player.is_alive?)
-    load_new_map = game.check_for_new_map_load(player, map)
-
-    if (load_new_map)
+    has_new_map = game.check_for_new_map_load(player, map)
+    if (has_new_map)
         new_map_info = game.get_new_map_zone_to_load(player, map)
         map_zone = new_map_info[:zone]
         start_coords = new_map_info[:entry_coords]
@@ -45,8 +35,6 @@ while (ah.handle_action(action, player, map) && player.is_alive?)
     end 
 
     has_enemies = game.check_for_battle(player, map)
-    has_treasure = game.check_for_treasure(player, map)
-
     if has_enemies
         Animations.battle
         press_any_key_to_continue()
@@ -56,6 +44,7 @@ while (ah.handle_action(action, player, map) && player.is_alive?)
         end
     end 
 
+    has_treasure = game.check_for_treasure(player, map)
     if has_treasure
         tile = game.get_tile_at_player_x_y(player, map) 
         treasure = tile.loot_treasure
@@ -75,6 +64,12 @@ while (ah.handle_action(action, player, map) && player.is_alive?)
 
         press_any_key_to_continue()
     end
+
+    has_shop = game.check_for_shop(player, map)
+    if (has_shop)
+        shop = game.create_shop(player, map)
+        shop.view_place()
+    end 
 
     system "clear"
     puts map.render_map(player)

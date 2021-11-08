@@ -26,14 +26,18 @@ class ItemGenerator
         end
     end 
 
-    def self.create_random_item
+    def self.create_item_from_key(item_key)
         item_table = ItemTable.new
-        lt = LootTable.new
-        item_key = lt.get_random_item 
         item_detail = item_table.get_item_info_by_key(item_key)
         type = item_detail[:type]
         name = item_detail[:name]
         gold = item_detail[:gold_value]
         self.create_item(type, name, gold, item_detail)
+    end 
+
+    def self.create_random_item
+        loot_table = LootTable.new
+        item_key = loot_table.get_random_item 
+        self.create_item_from_key(item_key)
     end 
 end 

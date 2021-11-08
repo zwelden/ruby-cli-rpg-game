@@ -66,6 +66,10 @@ class Tile
         self.type == "R"
     end 
 
+    def is_shop?
+        self.type == "s"
+    end 
+
     private
         def determine_passibility(tile_type)
             case tile_type
@@ -200,6 +204,10 @@ class Tile
             when "h"
                 ["/^^\\",
                  "|__|"]
+
+            when "s"
+                ["/^^\\",
+                 "|$$|"]
 
             when "m"
                 ["A^A^".colorize("bright_black"),

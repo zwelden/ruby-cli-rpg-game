@@ -1,0 +1,23 @@
+{
+    "dagger_1": { 
+        "weight": 10 
+    },
+    "mace_1": {
+        "weight": 10
+    },
+    "shield_1": {
+        "weight": 10
+    },
+    "shield_2": {
+        "weight": 10
+    },
+    "healing_potion_1": {
+        "weight": 30
+    },
+    "body_armor_1": {
+        "weight": 10
+    },
+    "leg_armor_1": {
+        "weight": 10
+    }
+}

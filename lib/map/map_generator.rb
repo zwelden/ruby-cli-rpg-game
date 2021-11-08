@@ -13,7 +13,7 @@ class MapGenerator
             ["e", "g", "g", "f", "f", "g", "g", "w", "w", "w", "r", "r", "r", "r", "r", "r", "r", "f", "f", "f", "f", "f", "e"],
             ["e", "g", "g", "g", "g", "g", "g", "w", "w", "w", "w", "r", "x", "x", "r", "x", "x", "f", "f", "f", "f", "f", "e"],
             ["e", "g", "g", "g", "g", "g", "w", "w", "w", "w", "g", "r", "x", "g", "r", "g", "x", "g", "f", "f", "f", "f", "e"],
-            ["e", "m", "g", "g", "g", "g", "g", "g", "g", "g", "g", "r", "x", "g", "h", "g", "x", "g", "g", "g", "f", "f", "e"],
+            ["e", "m", "g", "g", "g", "g", "g", "g", "g", "g", "g", "r", "x", "g", "s", "g", "x", "g", "g", "g", "f", "f", "e"],
             ["e", "m", "m", "g", "g", "g", "g", "g", "g", "g", "g", "r", "x", "x", "x", "x", "x", "g", "g", "f", "f", "f", "e"],
             ["e", "m", "m", "m", "g", "g", "g", "g", "g", "g", "g", "r", "g", "g", "g", "g", "g", "f", "f", "f", "f", "f", "e"],
             ["e", "m", "m", "m", "g", "g", "g", "w", "w", "w", "r", "r", "g", "g", "g", "g", "g", "f", "f", "f", "f", "f", "e"],
@@ -37,6 +37,15 @@ class MapGenerator
             '9_15' => {
                 zone: 4,
                 entry_coords: [9,1]
+            }
+        },
+        places: {
+            '14_7' => {
+                place_type: :shop,
+                name: "Bob's Bait and Tackle Shop",
+                max_items: 5,
+                type: "generic",
+                level: 1
             }
         }
     }
@@ -67,7 +76,8 @@ class MapGenerator
                 zone: 1,
                 entry_coords: [17,1]
             }
-        }
+        },
+        places: {}
     }
 
     MAP_3 = {
@@ -96,7 +106,8 @@ class MapGenerator
                 zone: 1,
                 entry_coords: [1,2]
             }
-        }
+        },
+        places: {}
     }
 
     MAP_4 = {
@@ -125,7 +136,8 @@ class MapGenerator
                 zone: 1,
                 entry_coords: [9,14]
             }
-        }
+        },
+        places: {}
     }
 
     def self.generate_map_tiles(tile_detail)
@@ -166,6 +178,7 @@ class MapGenerator
         map_name = map_template[:map_name]
         start_position = map_template[:start_position]
         map_gateways = map_template[:map_gateways]
-        Map.new(map_name, tiles, start_position, map_gateways)
+        places = map_template[:places]
+        Map.new(map_name, tiles, start_position, map_gateways, places)
     end
 end

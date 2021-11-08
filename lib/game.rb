@@ -1,6 +1,7 @@
 require "helpers/dice"
 require "character/enemy_generator"
 require 'item/item_generator'
+require 'place/shop'
 
 class Game 
     def get_tile_at_player_x_y(player, map)
@@ -113,5 +114,27 @@ class Game
         new_map_zone = map.gateways[new_map_key]
         
         new_map_zone 
+    end
+    
+    def check_for_shop(player, map)
+        if (player.has_moved? == false)
+            return false 
+        end 
+
+        tile = get_tile_at_player_x_y(player, map)
+
+        return tile.is_shop?
+    end 
+
+    def create_shop(player, map)
+        x_pos, y_pos = player.coords 
+        place_key = "#{x_pos}_#{y_pos}"
+        shop_detail = map.places[place_key]
+        shop_name = shop_detail[:name]
+        shop_max_items = shop_detail[:max_items]
+        shop_type = shop_detail[:type]
+        shop_level = shop_detail[:level]
+
+        Shop.new(shop_name, shop_max_items, shop_type, shop_level)
     end 
 end

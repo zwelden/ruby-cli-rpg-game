@@ -1,4 +1,5 @@
-require 'game_log'
+require 'json'
+
 class LootTable 
     TABLE_FILE_PATH = File.expand_path(File.dirname(__FILE__)) + '/tables'
 

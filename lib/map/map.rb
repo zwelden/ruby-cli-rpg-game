@@ -5,12 +5,14 @@ class Map
     attr_reader :name 
     attr_reader :start_position
     attr_reader :gateways
+    attr_reader :places
 
-    def initialize(name, tiles, start_position, map_gateways)
+    def initialize(name, tiles, start_position, map_gateways, places)
         @name = name
         @tiles = tiles
         @start_position = start_position
         @gateways = map_gateways
+        @places = places
     end 
 
     def inbounds?(x, y) 
