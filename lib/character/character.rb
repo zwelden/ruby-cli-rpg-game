@@ -59,6 +59,25 @@ class Character
         nil 
     end 
 
+    def get_item_by_slot_name(slot)
+        case slot
+        when :shield_slot
+            @shield_slot
+
+        when :weapon_slot
+            @weapon_slot
+
+        when :body_slot
+            @body_slot
+
+        when :leg_slot
+            @leg_slot
+
+        else 
+            mil
+        end 
+    end 
+
     def remove_item_from_inventory_at_index(index)
         @inventory.delete_at(index)
     end 

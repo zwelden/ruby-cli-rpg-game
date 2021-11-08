@@ -110,6 +110,44 @@ class InventoryManager
         return true
     end
 
+    def self.show_item_detail(player)
+        item_selection = self.get_item_view_selection()
+        item = nil 
+
+        case item_selection
+        when "w"
+            item = player.get_item_by_slot_name(:weapon_slot)
+
+        when "s"
+            item = player.get_item_by_slot_name(:shield_slot)
+
+        when "b"
+            item = player.get_item_by_slot_name(:body_slot)
+
+        when "l"
+            item = player.get_item_by_slot_name(:leg_slot)
+        
+        else 
+            item_idx = item_selection.to_i - 1
+            if (self.index_in_inventory?(player, item_idx))
+                item = player.get_item_at_inventory_index(item_idx)
+            else  
+                item = nil
+            end 
+        end 
+        
+        if (item == nil)
+            puts "Unable to view that item"
+            press_any_key_to_continue()
+            return true 
+        end 
+
+        system "clear"
+        Display.show_item_detail(item)
+        press_any_key_to_continue()
+        return true
+    end
+
     def self.handle_next_inventory_action(action, player)
         case action
         when "b"
@@ -131,6 +169,9 @@ class InventoryManager
         when "d"
             return self.drop_item(player)
 
+        when "v"
+            return self.show_item_detail(player)
+
         else
             return true
         end
@@ -143,6 +184,17 @@ class InventoryManager
         print prompt
         gets.chomp 
     end
+
+    def self.get_item_view_selection()
+        puts "Choose item to view: "
+        puts "w - equipped weapon"
+        puts "s - equipped shield"
+        puts "b - equipped body"
+        puts "l - equipped legs"
+        puts "<#> - inventory slot number"
+        print "> "
+        gets.chomp
+    end 
 
     def self.choose_item_to_use()
         puts "What item would you like to use?"

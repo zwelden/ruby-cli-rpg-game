@@ -3,7 +3,7 @@ require 'helpers/utilities'
 class Display 
 
     def self.player_info(player)
-        player_name_str = player.name.ljust(51, ' ').colorize("green");
+        player_name_str = player.name.ljust(51, ' ').colorize("green")
         health_str = "Health: #{player.health}".ljust(24, ' ')
         strength_str = "Strength: #{player.strength}".ljust(24, ' ')
         attack_power_str = "Attack Power: #{player.get_attack_power}".ljust(24, ' ')
@@ -126,7 +126,7 @@ class Display
         place_holder = "".ljust(15, ' ')
 
         if (enemy.is_alive?)
-            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ').colorize("red");
+            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ').colorize("red")
 
             display_info = <<~END 
                 ╒═══════════════════════════════════╕
@@ -137,7 +137,7 @@ class Display
                 ╘═════════════════╧═════════════════╛
             END
         else 
-            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ').colorize("red").colorize("linethrough");
+            enemy_name_str = (enemy_num.to_s + '.) ' + enemy.name).ljust(33, ' ').colorize("red").colorize("linethrough")
 
             display_info = <<~END 
                 ╒═══════════════════════════════════╕
@@ -184,6 +184,7 @@ class Display
             │ u - unequip item                                  │
             │ c - use item                                      │
             │ d - drop item                                     │
+            │ v - view item                                     │
             ╘═══════════════════════════════════════════════════╛
         
         END
@@ -191,6 +192,42 @@ class Display
         puts display 
         press_any_key_to_continue()
     end
+
+    def self.show_item_detail(item)
+        item_name_str = item.name.ljust(51, ' ').colorize("green")
+        item_type_str = ("Type: " + item.type.to_s.capitalize).ljust(51, ' ')
+
+        display_info = <<~END 
+            ╒═════════════════════════════════════════════════════╕
+            │ #{item_name_str} │
+            ├─────────────────────────────────────────────────────┤
+            │ #{item_type_str} │ 
+        END
+
+        case item.type
+        when :armor
+            armor_type_str = ("Slot: " + item.armor_type.to_s.capitalize).ljust(51, ' ')
+            armor_str = ("Armor: " + item.armor.to_s).ljust(51, ' ')
+            display_info << "│ #{armor_type_str} │\n│ #{armor_str} │\n"
+
+        when :weapon
+            power_str = ("Power: " + item.power.to_s).ljust(51, ' ')
+            display_info << "│ #{power_str} │\n"
+
+        when :shield
+            armor_str = ("Armor: " + item.armor.to_s).ljust(51, ' ')
+            display_info << "│ #{armor_str} │\n"
+
+        when :potion
+            health_points_str = ("Health: " + item.health_points.to_s).ljust(51, ' ')
+            display_info << "│ #{health_points_str} │\n"
+            
+        end
+
+        display_info << "╘═════════════════════════════════════════════════════╛"
+
+        puts display_info
+    end 
 
     def self.treasure_found 
         display_str = <<~END 
