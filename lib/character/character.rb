@@ -45,23 +45,38 @@ class Character
         @gold += amount 
     end 
 
-    def add_inventory(inventory)
-        if (inventory.length > 0)
-            @inventory.concat(inventory)
+    def add_inventory(new_inventory)
+        if (new_inventory.length > 0)
+            @inventory.concat(new_inventory)
         end
+    end 
+
+    def get_item_at_inventory_index(index)
+        if (index >= 0 && index < @inventory.length)
+            return @inventory[index]
+        end 
+        
+        nil 
+    end 
+
+    def remove_item_from_inventory_at_index(index)
+        @inventory.delete_at(index)
     end 
 
     def equip_item(item)
         current_item = nil
+        equipped = false
 
         case item.type
         when :shield
             current_item = @shield_slot
             @shield_slot = item 
+            equipped = true
 
         when :weapon
             current_item = @weapon_slot
             @weapon_slot = item 
+            equipped = true
 
         when :armor
             armor_type = item.armor_type
@@ -70,17 +85,21 @@ class Character
             when :body 
                 current_item = @body_slot
                 @body_slot = item 
+                equipped = true
 
             when :legs
                 current_item = @leg_slot
                 @leg_slot = item 
+                equipped = true
   
-            end
+            end 
         end
 
         if current_item != nil 
             @inventory.push(current_item)
         end 
+
+        equipped
     end
 
     def unequip_item(slot)

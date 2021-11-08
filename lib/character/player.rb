@@ -77,7 +77,6 @@ class Player < Character
 
         system "clear"
         Display.full_player_info(self)
-        press_any_key_to_continue()
     end 
 
     def increase_experience(amount)

@@ -1,5 +1,6 @@
 require 'io/console'
 require 'ui/display'
+require 'inventory_manager'
 
 class ActionHandler
     def get_next_action(prompt='> ')
@@ -35,7 +36,7 @@ class ActionHandler
             true
 
         when "c"
-            player.show_full_detail() 
+            InventoryManager.manage_inventory(player)
             true
 
         when "sleep"

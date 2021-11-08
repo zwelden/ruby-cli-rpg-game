@@ -175,6 +175,22 @@ class Display
         press_any_key_to_continue()
     end
 
+    def self.inventory_options
+        display = <<~END
+            ╒═══════════════════════════════════════════════════╕
+            │ OPTIONS                                           │
+            │ b - back to game                                  │
+            │ e - equip item                                    │
+            │ u - unequip item                                  │
+            │ c - use item                                      │
+            ╘═══════════════════════════════════════════════════╛
+        
+        END
+
+        puts display 
+        press_any_key_to_continue()
+    end
+
     def self.treasure_found 
         display_str = <<~END 
                     YOU FOUND TREASURE!
