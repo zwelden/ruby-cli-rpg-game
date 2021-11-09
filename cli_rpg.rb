@@ -67,8 +67,9 @@ while (ah.handle_action(action, player, map) && player.is_alive?)
 
     has_shop = game.check_for_shop(player, map)
     if (has_shop)
+        system "clear"
         shop = game.create_shop(player, map)
-        shop.view_place()
+        shop.view_place(player)
     end 
 
     system "clear"

@@ -2,6 +2,7 @@ require 'place/place'
 require 'helpers/utilities'
 require 'item/shop_table'
 require 'item/item_generator'
+require 'ui/display'
 
 class Shop < Place
     attr_reader :items_for_sale
@@ -22,12 +23,8 @@ class Shop < Place
         end
     end 
 
-    def view_place
-        puts "Entering Shop"
-        @items_for_sale.each do |item|
-            buy_price = item.gold_value * 2
-            puts "* #{item.name} - $#{buy_price}"
-        end 
+    def view_place(player)
+        Display.show_shop(@name, player.inventory, @items_for_sale)
         press_any_key_to_continue()
     end 
 

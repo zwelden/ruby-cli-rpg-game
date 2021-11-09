@@ -229,6 +229,50 @@ class Display
         puts display_info
     end 
 
+    def self.show_shop(shop_name, player_inventory, shop_inventory)
+        shop_name_str = shop_name.ljust(71, ' ').colorize("cyan")
+        shop_len = [player_inventory.length, shop_inventory.length].max
+
+        display_info = <<~END 
+            ╒═════════════════════════════════════════════════════════════════════════╕
+            │ #{shop_name_str} │
+            ├────────────────────────────────────┬────────────────────────────────────┤
+            │                SELL                │                 BUY                │
+            ├────────────────────────────────────┼────────────────────────────────────┤
+            │ Item Name                    Price │ Item Name                    Price │
+            ├────────────────────────────────────┼────────────────────────────────────┤
+        END
+
+        shop_len.times do |arr_idx|
+            item_num = arr_idx + 1
+            item_num_str = "#{item_num}.".ljust(4, ' ') 
+            player_item = player_inventory[arr_idx]
+            shop_item = shop_inventory[arr_idx]
+
+            blank_str = " " * 36
+            player_sell_str = "│#{blank_str}│"
+            shop_buy_str = "#{blank_str}│"
+
+            if (player_item != nil)
+                player_item_str = "#{player_item.name}".ljust(23, ' ')
+                player_item_price_str = "#{player_item.gold_value}".rjust(5, ' ').colorize("green")
+                player_sell_str = "│ #{item_num_str} #{player_item_str} #{player_item_price_str} │"
+            end 
+
+            if (shop_item != nil)
+                buy_value = shop_item.gold_value * 2
+                shop_item_str = "#{shop_item.name}".ljust(23, ' ')
+                shop_item_price_str = "#{buy_value}".rjust(5, ' ').colorize("red")
+                shop_buy_str = " #{item_num_str} #{shop_item_str} #{shop_item_price_str} │"
+            end 
+
+            display_info << "#{player_sell_str}#{shop_buy_str}\n"
+        end
+
+        display_info << "╘════════════════════════════════════╧════════════════════════════════════╛\n"
+        puts display_info
+    end 
+
     def self.treasure_found 
         display_str = <<~END 
                     YOU FOUND TREASURE!
