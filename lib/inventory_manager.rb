@@ -203,7 +203,7 @@ class InventoryManager
     end  
 
     def self.get_item_selection()
-        puts "What item would you like to equip?"
+        puts "Select inventory item: "
         print "> "
         gets.chomp
     end  

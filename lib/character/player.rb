@@ -11,7 +11,6 @@ require 'game_log'
 class Player < Character
     attr_reader :coords
     attr_reader :prev_coords
-    attr_reader :recently_slept
     attr_reader :experience
     attr_reader :tile
 
@@ -19,8 +18,6 @@ class Player < Character
         super(name, 50, 6, 3, 1, gold: 10)
 
         @experience = 0
-        @recently_slept = false
-        @recently_slept_move_counter = 0
         @coords = [0,0]
         @tile = Tile.new('player')
 
@@ -39,30 +36,12 @@ class Player < Character
 
     def sleep 
         update_prev_coords_from_current_position()
-
-        if (@recently_slept == true)
-            puts "You have recently slept, you need to move around a bit before you can sleep again"
-            press_any_key_to_continue()
-            return
-        end 
-
         restore_health = @max_health / 2 
         increase_health(restore_health)
-        @recently_slept = true
-        @recently_slept_move_counter = 3
         Animations.sleep_player()
         puts "You sleep and restore a bit of health"
         press_any_key_to_continue()
     end
-    
-    def decrement_recent_sleep
-        @recently_slept_move_counter -= 1
-
-        if (@recently_slept_move_counter <= 0)
-            @recently_slept_move_counter = 0
-            @recently_slept = false 
-        end 
-    end 
 
     def show_inventory 
         update_prev_coords_from_current_position()
@@ -137,7 +116,6 @@ class Player < Character
         new_y = y_pos - 1 
         if ( map.inbounds?(x_pos, new_y) && map.is_passible?(x_pos, new_y) )
             set_coords(x_pos, new_y)
-            decrement_recent_sleep()
         end
     end 
 
@@ -147,7 +125,6 @@ class Player < Character
         new_y = y_pos + 1 
         if ( map.inbounds?(x_pos, new_y) && map.is_passible?(x_pos, new_y) )
             set_coords(x_pos, new_y)
-            decrement_recent_sleep()
         end
     end 
 
@@ -157,7 +134,6 @@ class Player < Character
         new_x = x_pos - 1 
         if ( map.inbounds?(new_x, y_pos) && map.is_passible?(new_x, y_pos) )
             set_coords(new_x, y_pos)
-            decrement_recent_sleep()
         end
     end 
 
@@ -167,7 +143,6 @@ class Player < Character
         new_x = x_pos + 1 
         if ( map.inbounds?(new_x, y_pos) && map.is_passible?(new_x, y_pos) )
             set_coords(new_x, y_pos)
-            decrement_recent_sleep()
         end
     end 
 end
