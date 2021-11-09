@@ -15,11 +15,13 @@ class Game
     attr_reader :player
     attr_reader :map
     attr_reader :game_over
+    attr_reader :places_visited
 
     def initialize
         @game_over = false
         @turn_count = 0 
         @cooldowns = {}
+        @places_visited = {}
         @player = Player.generate_new_player
         @map = MapGenerator.generate_new_map(1)
 
@@ -191,6 +193,28 @@ class Game
         Shop.new(shop_name, shop_max_items, shop_type, shop_level)
     end 
 
+    def get_place_from_places_visited
+        map_name = @map.name 
+        x_pos, y_pos = @player.coords 
+        coords_str = "#{x_pos}_#{y_pos}"
+
+        map_places = @places_visited[map_name]
+        if map_places == nil 
+            return nil 
+        end 
+
+        map_places[coords_str]
+    end 
+
+    def add_place_to_places_visited(place)
+        map_name = @map.name 
+        x_pos, y_pos = @player.coords 
+        coords_str = "#{x_pos}_#{y_pos}"
+
+        @places_visited[map_name] ||= {}
+        @places_visited[map_name][coords_str] = place 
+    end 
+
     # ************** #
     # GAME SEQUENCES #
     # ************** #
@@ -255,8 +279,19 @@ class Game
 
         has_shop = check_for_shop()
         if (has_shop)
+            shop = get_place_from_places_visited()
+            if (shop == nil)
+                shop = create_shop()
+                add_place_to_places_visited(shop)
+                @cooldowns[shop.symbol_ref] = {turns: 10} 
+            end 
+
+            if (@cooldowns[shop.symbol_ref] == nil || @cooldowns[shop.symbol_ref][:turns] <= 0)
+                shop.reload_items_for_sale() 
+                @cooldowns[shop.symbol_ref] = {turns: 10} 
+            end 
+
             system "clear"
-            shop = create_shop()
             shop.view_place(@player)
         end 
     end 

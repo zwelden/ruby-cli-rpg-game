@@ -45,11 +45,23 @@ class Character
         @gold += amount 
     end 
 
+    def reduce_gold(amount)
+        @gold -= amount 
+    end 
+
     def add_inventory(new_inventory)
         if (new_inventory.length > 0)
             @inventory.concat(new_inventory)
         end
     end 
+
+    def add_item_to_inventory(item)
+        @inventory.push(item)
+    end 
+
+    def index_in_inventory?(index)
+        return (@inventory.length > 0 && index >= 0 && index < @inventory.length)
+    end
 
     def get_item_at_inventory_index(index)
         if (index >= 0 && index < @inventory.length)

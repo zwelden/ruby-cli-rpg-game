@@ -12,10 +12,6 @@ class InventoryManager
         end 
     end 
 
-    def self.index_in_inventory?(player, item_idx)
-        return item_idx >= 0 && item_idx < player.inventory.length
-    end 
-
     def self.display_invalid_inventory_idx 
         puts "Invalid inventory option."
         press_any_key_to_continue()
@@ -23,7 +19,7 @@ class InventoryManager
 
     def self.equip_item(player)
         item_idx = self.get_item_selection().to_i - 1 
-        if (self.index_in_inventory?(player, item_idx) == false)
+        if (player.index_in_inventory?(item_idx) == false)
             self.display_invalid_inventory_idx()
             return true
         end 
@@ -70,7 +66,7 @@ class InventoryManager
 
     def self.consume_item(player)
         item_idx = self.choose_item_to_use().to_i - 1
-        if (self.index_in_inventory?(player, item_idx) == false)
+        if (player.index_in_inventory?(item_idx) == false)
             self.display_invalid_inventory_idx()
             return true
         end 
@@ -90,7 +86,7 @@ class InventoryManager
 
     def self.drop_item(player)
         item_idx = self.get_item_selection().to_i - 1 
-        if (self.index_in_inventory?(player, item_idx) == false)
+        if (player.index_in_inventory?(item_idx) == false)
             self.display_invalid_inventory_idx()
             return true
         end 
@@ -129,7 +125,7 @@ class InventoryManager
         
         else 
             item_idx = item_selection.to_i - 1
-            if (self.index_in_inventory?(player, item_idx))
+            if (player.index_in_inventory?(item_idx))
                 item = player.get_item_at_inventory_index(item_idx)
             else  
                 item = nil
