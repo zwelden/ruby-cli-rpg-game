@@ -229,13 +229,18 @@ class Display
         puts display_info
     end 
 
-    def self.show_shop(shop_name, player_inventory, shop_inventory)
+    def self.show_shop(shop_name, shop_inventory, player)
+        player_inventory = player.inventory 
+        player_gold = player.gold
         shop_name_str = shop_name.ljust(71, ' ').colorize("cyan")
         shop_len = [player_inventory.length, shop_inventory.length].max
+        gold_avaliable = "Your funds: #{player_gold} gold".ljust(71, ' ')
 
         display_info = <<~END 
             ╒═════════════════════════════════════════════════════════════════════════╕
             │ #{shop_name_str} │
+            ├─────────────────────────────────────────────────────────────────────────┤
+            │ #{gold_avaliable} │
             ├────────────────────────────────────┬────────────────────────────────────┤
             │                SELL                │                 BUY                │
             ├────────────────────────────────────┼────────────────────────────────────┤

@@ -4,6 +4,7 @@ require 'item/shop_table'
 require 'item/item_generator'
 require 'ui/display'
 require 'securerandom'
+require 'inventory_manager'
 
 class Shop < Place
     attr_reader :items_for_sale
@@ -152,6 +153,7 @@ class Shop < Place
         puts "b - buy item"
         puts "s - sell item"
         puts "v - view item"
+        puts "c - view character"
         puts "l - leave"
         print "> "
         gets.chomp 
@@ -168,6 +170,9 @@ class Shop < Place
         when "v"
             view_item(player)
 
+        when "c"
+            InventoryManager.manage_inventory(player)
+
         when "l"
             leave_store()
 
@@ -177,7 +182,7 @@ class Shop < Place
     def store_loop(player)
         while(@player_in_store) 
             system "clear"
-            Display.show_shop(@name, player.inventory, @items_for_sale)
+            Display.show_shop(@name, @items_for_sale, player)
             action = get_next_store_action()
             handle_store_action(action,  player)
         end 
