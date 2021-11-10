@@ -6,13 +6,15 @@ class Map
     attr_reader :start_position
     attr_reader :gateways
     attr_reader :places
+    attr_reader :zone_id
 
-    def initialize(name, tiles, start_position, map_gateways, places)
+    def initialize(name, zone_id, tiles, start_position, map_gateways, places)
         @name = name
         @tiles = tiles
         @start_position = start_position
         @gateways = map_gateways
         @places = places
+        @zone_id = zone_id
     end 
 
     def inbounds?(x, y) 
@@ -48,20 +50,24 @@ class Map
             player_x, player_y = player.coords
         end 
         map_width = @tiles[0].length
+        map_width_ch_len = map_width * 4
         win_height, win_width = IO.console.winsize
         lpad = (win_width - (map_width + 2)) / 2 
         lpad_str = " " * lpad
 
         wall = "\u2588"
-        border_h = "\u2550"
-        border_v = "\u2551"
-        border_corner_top_r = "\u2557"
-        border_corner_top_l = "\u2554"
-        border_corner_bottom_r = "\u255D"
-        border_corner_bottom_l = "\u255A"
+        border_h = "═"
+        border_v = "║"
+        border_corner_top_r = "╗"
+        border_corner_top_l = "╔"
+        border_corner_bottom_r = "╝"
+        border_corner_bottom_l = "╚"
 
         rendered_map = "\n"
-        rendered_map << (border_corner_top_l + (border_h * (map_width * 4)) + border_corner_top_r + "\n")
+        rendered_map << (border_corner_top_l + (border_h * map_width_ch_len) + border_corner_top_r + "\n")
+        rendered_map << border_v + " #{@name}".ljust(map_width_ch_len).colorize("cyan") + border_v + "\n"
+        rendered_map << (border_corner_bottom_l + (border_h * map_width_ch_len) + border_corner_bottom_r + "\n")
+        rendered_map << (border_corner_top_l + (border_h * map_width_ch_len) + border_corner_top_r + "\n")
 
         @tiles.each_with_index do |row, row_idx|
             map_row_line_1 = ""
@@ -87,7 +93,7 @@ class Map
             rendered_map << (map_row_line_2 + "\n")
         end 
 
-        rendered_map << (border_corner_bottom_l + (border_h * (map_width * 4)) + border_corner_bottom_r + "\n")
+        rendered_map << (border_corner_bottom_l + (border_h * map_width_ch_len) + border_corner_bottom_r + "\n")
 
         rendered_map
     end

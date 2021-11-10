@@ -1,0 +1,17 @@
+{
+    "g": {
+        "bandit": {
+            "weight": 2
+        }
+    },
+    "f": {
+        "bandit": {
+            "weight": 3
+        }
+    },
+    "m": {
+        "bandit": {
+            "weight": 3
+        }
+    }
+}

@@ -38,30 +38,41 @@ class Battle
     def calculate_damage(attacker, defender)
         is_crit = (Dice.d20 == 20)
 
-        attack = Dice.d8 + attacker.strength + attacker.get_attack_power
+        attack = Dice.d10 + attacker.strength + attacker.get_attack_power
         defense = Dice.d6 + defender.defense + defender.get_armor
 
         if (is_crit)
             attack *= 2 
+            defense /= 2
         end 
 
         damage = attack - defense 
 
         if (damage < 0)
             damage = 0 
+            is_crit = false
         end 
 
         [damage, is_crit] 
     end 
 
     def display_damage_done(damage, is_crit, attacker, defender)
+        atk_color = "red"
+        def_color = "green"
+
+        if (attacker.class == Player)
+            atk_color = "green"
+            def_color = "red"
+        end
+
         if (damage > 0)
-            if (is_crit) 
-                puts "#{attacker.name} Cits!"
+            if (is_crit)
+                crit_str = "Crits".colorize("cyan") 
+                puts "#{attacker.name.colorize(atk_color)} #{crit_str}!"
             end 
-            puts "#{attacker.name} does #{damage} damage to #{defender.name}"
+            puts "#{attacker.name.colorize(atk_color)} does #{damage.to_s.colorize(atk_color)} damage to #{defender.name.colorize(def_color)}"
         else 
-            puts "#{attacker.name} misses #{defender.name}"
+            puts "#{attacker.name.colorize(atk_color)} misses #{defender.name.colorize(def_color)}"
         end 
     end 
 

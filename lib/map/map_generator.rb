@@ -23,7 +23,8 @@ class MapGenerator
             ["e", "m", "m", "g", "g", "g", "g", "g", "g", "r", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "e"],
             ["e", "e", "e", "e", "e", "e", "e", "e", "e", "R", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"]
         ],
-        map_name: "Zone 1",
+        map_name: "Pleasant Meadow",
+        zone_id: :zone_1,
         start_position: [14,4],
         map_gateways: {
             '0_2' => {
@@ -69,7 +70,8 @@ class MapGenerator
             ["e", "m", "m", "m", "m", "f", "f", "g", "w", "g", "g", "g", "g", "g", "g", "f", "f", "r", "f", "f", "f", "f", "e"],
             ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "R", "e", "e", "e", "e", "e"]
         ],
-        map_name: "Zone 2",
+        map_name: "Mountain Pass",
+        zone_id: :zone_2,
         start_position: [1,1],
         map_gateways: {
             '17_15' => {
@@ -83,23 +85,24 @@ class MapGenerator
     MAP_3 = {
         tiles: [
             ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "e", "e", "e", "r", "R"],
-            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "T", "t", "t", "t", "y", "t", "t", "t", "x", "e", "e", "r", "r", "e"],
-            ["e", "e", "e", "e", "e", "x", "x", "x", "x", "t", "t", "T", "t", "t", "g", "t", "t", "x", "e", "e", "r", "e", "e"],
-            ["e", "e", "e", "e", "e", "x", "t", "T", "t", "g", "t", "t", "t", "t", "t", "t", "t", "x", "r", "r", "r", "e", "e"],
-            ["e", "e", "e", "e", "x", "x", "t", "y", "t", "t", "y", "x", "t", "T", "t", "r", "r", "r", "r", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "x", "c", "t", "g", "T", "t", "t", "x", "t", "t", "t", "t", "t", "x", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "x", "x", "t", "t", "t", "t", "t", "x", "T", "t", "t", "T", "t", "x", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "x", "t", "t", "t", "y", "t", "t", "t", "t", "y", "t", "g", "x", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "x", "x", "x", "x", "t", "T", "t", "g", "t", "t", "t", "t", "x", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "t", "t", "t", "t", "T", "t", "Y", "t", "x", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "t", "t", "t", "t", "t", "t", "t", "t", "x", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "e", "e", "e", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "e", "e", "e", "e", "e"],
-            ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"],
+            ["e", "m", "m", "m", "m", "m", "m", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "g", "g", "e"],
+            ["e", "m", "m", "f", "f", "f", "f", "f", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "f", "g", "g", "r", "R"],
+            ["e", "m", "f", "f", "f", "f", "f", "f", "x", "T", "t", "t", "t", "y", "t", "t", "t", "x", "g", "g", "r", "r", "e"],
+            ["e", "m", "f", "f", "f", "x", "x", "x", "x", "t", "t", "T", "t", "t", "g", "t", "t", "x", "g", "g", "r", "g", "e"],
+            ["e", "m", "f", "f", "f", "x", "t", "T", "t", "g", "t", "t", "t", "t", "t", "t", "t", "x", "r", "r", "r", "g", "e"],
+            ["e", "m", "m", "f", "x", "x", "t", "y", "t", "t", "y", "x", "t", "T", "t", "r", "r", "r", "r", "g", "g", "g", "e"],
+            ["e", "m", "m", "f", "x", "c", "t", "g", "T", "t", "t", "x", "t", "t", "t", "t", "t", "x", "g", "g", "g", "m", "e"],
+            ["e", "m", "m", "f", "x", "x", "t", "t", "t", "t", "t", "x", "T", "t", "t", "T", "t", "x", "g", "g", "m", "m", "e"],
+            ["e", "m", "f", "f", "f", "x", "t", "t", "t", "y", "t", "t", "t", "t", "y", "t", "g", "x", "g", "g", "m", "m", "e"],
+            ["e", "m", "f", "f", "f", "x", "x", "x", "x", "t", "T", "t", "g", "t", "t", "t", "t", "x", "g", "g", "m", "m", "e"],
+            ["e", "m", "f", "f", "f", "f", "f", "f", "x", "t", "t", "t", "t", "T", "t", "Y", "t", "x", "g", "g", "m", "m", "e"],
+            ["e", "m", "f", "f", "f", "f", "f", "f", "x", "t", "t", "t", "t", "t", "t", "t", "t", "x", "g", "g", "m", "m", "e"],
+            ["e", "m", "m", "f", "f", "f", "f", "f", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "f", "m", "m", "m", "e"],
+            ["e", "m", "m", "m", "m", "m", "m", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "m", "m", "m", "e"],
             ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"]
         ],
-        map_name: "Zone 3",
+        map_name: "Graveyard",
+        zone_id: :zone_3,
         start_position: [2,2],
         map_gateways: {
             '22_2' => {
@@ -129,7 +132,8 @@ class MapGenerator
             ["e", "m", "m", "f", "f", "f", "w", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "m", "m", "m", "e"],
             ["e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e"]
         ],
-        map_name: "Zone 4",
+        map_name: "Big City",
+        zone_id: :zone_4,
         start_position: [3,3],
         map_gateways: {
             '9_0' => {
@@ -176,9 +180,10 @@ class MapGenerator
 
         tiles = self.generate_map_tiles(map_template[:tiles])
         map_name = map_template[:map_name]
+        map_zone_id = map_template[:zone_id]
         start_position = map_template[:start_position]
         map_gateways = map_template[:map_gateways]
         places = map_template[:places]
-        Map.new(map_name, tiles, start_position, map_gateways, places)
+        Map.new(map_name, map_zone_id, tiles, start_position, map_gateways, places)
     end
 end

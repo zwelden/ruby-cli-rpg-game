@@ -1,4 +1,5 @@
 require "character/enemy_generator"
+require 'character/enemy_zone_table'
 require 'character/player'
 require 'item/item_generator'
 require 'place/shop'
@@ -16,6 +17,8 @@ class Game
     attr_reader :map
     attr_reader :game_over
     attr_reader :places_visited
+    attr_reader :enemy_generator
+    attr_reader :enemy_zone_table
 
     def initialize
         @game_over = false
@@ -24,6 +27,8 @@ class Game
         @places_visited = {}
         @player = Player.generate_new_player
         @map = MapGenerator.generate_new_map(1)
+        @enemy_generator = EnemyGenerator.new
+        @enemy_zone_table = EnemyZoneTable.new(@map.zone_id)
 
         @player.set_start_position(*map.start_position)
     end
@@ -64,12 +69,26 @@ class Game
         @map.get_tile(player_x, player_y)
     end 
 
+    def get_num_enemies 
+        enemy_roll = Dice.d10 
+        if (enemy_roll == 10)
+            3 
+        elsif (enemy_roll >= 6)
+            2 
+        else  
+            1 
+        end 
+    end
+
     def create_enemies(tile)
         enemy_arr = []
         
-        enemy_count = rand(1..3)
+        enemy_count = get_num_enemies()
+
         enemy_count.times do
-            enemy_arr.push(EnemyGenerator.create_random_enemy())
+            enemy_key = @enemy_zone_table.get_random_enemy_key(tile.type_to_symbol())
+            enemy = @enemy_generator.create_enemy_from_key(enemy_key)
+            enemy_arr.push(enemy)
         end 
 
         enemy_arr.each do |enemy|
@@ -228,6 +247,7 @@ class Game
             map_zone = new_map_info[:zone]
             start_coords = new_map_info[:entry_coords]
             @map = MapGenerator.generate_new_map(map_zone)
+            @enemy_zone_table = EnemyZoneTable.new(@map.zone_id)
 
             system "clear"
             puts @map.render_map(@player)

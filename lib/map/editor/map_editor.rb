@@ -20,7 +20,8 @@ def update_map()
     map_name = 'Test Map'
     start_position = [0,0]
     map_gateways = {}
-    Map.new(map_name, tiles, start_position, map_gateways)
+    map_places = {}
+    Map.new(map_name, :zone_1, tiles, start_position, map_gateways, map_places)
 end 
 
 while true 

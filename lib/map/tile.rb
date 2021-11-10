@@ -27,6 +27,10 @@ class Tile
         "<Tile type=#{type}>"
     end
 
+    def type_to_symbol 
+        return @type.to_sym
+    end
+
     def load_enemies(enemies)
         @enemies = enemies
     end 
@@ -93,19 +97,19 @@ class Tile
         def determine_enemy_chance(tile_type)  
             case tile_type
             when "g"
-                1
+                5
 
             when "m"
-                12
+                25
 
             when "f"
-                6
+                15
 
             when "t"
-                25
+                50
 
             when "T"
-                25
+                50
 
             else  
                 0

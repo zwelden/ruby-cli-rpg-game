@@ -1,0 +1,35 @@
+{
+    "g": {
+        "armed_bandit": {
+            "weight": 2
+        }, 
+        "rattle_snake": {
+            "weight": 3
+        }
+    },
+    "f": {
+        "armed_bandit": {
+            "weight": 3
+        }, 
+        "wild_boar": {
+            "weight": 6
+        }, 
+        "hawk": { 
+            "weight": 5
+        }, 
+        "forest_troll_warrior": {
+            "weight": 1
+        }
+    },
+    "m": {
+        "armed_bandit": {
+            "weight": 2
+        }, 
+        "mountain_goat": {
+            "weight": 4
+        },
+        "mountain_troll_warrior": {
+            "weight": 1
+        }
+    }
+}

@@ -1,0 +1,128 @@
+{
+    "rat": {
+        "name": "Rat",
+        "health": 20, 
+        "strength": 1, 
+        "defense": 1,
+        "level": 1 
+    },
+    "wolf": {
+        "name": "Wolf",
+        "health": 30, 
+        "strength": 3, 
+        "defense": 2,
+        "level": 1
+    },
+    "spider": {
+        "name": "Spider",
+        "health": 25, 
+        "strength": 3, 
+        "defense": 3,
+        "level": 1
+    },
+    "forest_troll": {
+        "name": "Forest Troll",
+        "health": 40, 
+        "strength": 5, 
+        "defense": 3,
+        "level": 1
+    },
+    "mountain_troll": {
+        "name": "Mountain Troll",
+        "health": 50, 
+        "strength": 6, 
+        "defense": 3,
+        "level": 1
+    },
+    "grizzly_bear": {
+        "name": "Grizzly Bear",
+        "health": 40, 
+        "strength": 5, 
+        "defense": 5,
+        "level": 1
+    },
+    "bandit": {
+        "name": "Bandit",
+        "health": 30, 
+        "strength": 3, 
+        "defense": 2,
+        "level": 1
+    },
+    "armed_bandit": {
+        "name": "Armed Bandit",
+        "health": 60, 
+        "strength": 7, 
+        "defense": 5,
+        "level": 2
+    },
+    "rattle_snake": {
+        "name": "Rattle Snake",
+        "health": 45, 
+        "strength": 5, 
+        "defense": 3,
+        "level": 2
+    },
+    "forest_troll_warrior": {
+        "name": "Forest Troll Warrior",
+        "health": 75, 
+        "strength": 9, 
+        "defense": 6,
+        "level": 2
+    },
+    "wild_boar": {
+        "name": "Wild Boar",
+        "health": 55, 
+        "strength": 7, 
+        "defense": 5,
+        "level": 2
+    },
+    "hawk": {
+        "name": "Hawk",
+        "health": 60, 
+        "strength": 7, 
+        "defense": 3,
+        "level": 2
+    },
+    "mountain_troll_warrior": {
+        "name": "Mountain Troll Warrior",
+        "health": 80, 
+        "strength": 10, 
+        "defense": 7,
+        "level": 2
+    },
+    "mountain_goat": {
+        "name": "Mountain Goat",
+        "health": 60, 
+        "strength": 7, 
+        "defense": 4,
+        "level": 2
+    },
+    "giant_rat": {
+        "name": "Giant Rat",
+        "health": 45, 
+        "strength": 5, 
+        "defense": 3,
+        "level": 2
+    },
+    "goul": {
+        "name": "Goul",
+        "health": 10, 
+        "strength": 1, 
+        "defense": 1,
+        "level": 1 
+    },
+    "skeleton": {
+        "name": "Skeleton",
+        "health": 10, 
+        "strength": 5, 
+        "defense": 1,
+        "level": 1 
+    },
+    "zombie": {
+        "name": "Zombie",
+        "health": 20, 
+        "strength": 3, 
+        "defense": 2,
+        "level": 1 
+    }
+}

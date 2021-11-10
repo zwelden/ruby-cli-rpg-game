@@ -1,0 +1,45 @@
+{
+    "g": {
+        "bandit": {
+            "weight": 2
+        }
+    },
+    "f": {
+        "bandit": {
+            "weight": 3
+        }
+    },
+    "m": {
+        "bandit": {
+            "weight": 3
+        }
+    },
+    "t" : {
+        "skeleton": {
+            "weight": 1
+        },
+        "goul": {
+            "weight": 1
+        },
+        "zombie": {
+            "weight": 1
+        },
+        "giant_rat": {
+            "weight": 1
+        }
+    },
+    "T" : {
+        "skeleton": {
+            "weight": 1
+        },
+        "goul": {
+            "weight": 1
+        },
+        "zombie": {
+            "weight": 1
+        },
+        "giant_rat": {
+            "weight": 1
+        }
+    }
+}
