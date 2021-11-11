@@ -1,0 +1,38 @@
+{
+    "mace_2": {
+        "weight": 10
+    },
+    "axe_2": {
+        "weight": 10
+    },
+    "staff_2": {
+        "weight": 10
+    },
+    "sword_2": {
+        "weight": 10
+    },
+    "shield_2": {
+        "weight": 10
+    },
+    "shield_3": {
+        "weight": 10
+    },
+    "healing_potion_1": {
+        "weight": 35
+    },
+    "healing_potion_2": {
+        "weight": 35
+    },
+    "body_armor_2": {
+        "weight": 10
+    },
+    "body_armor_3": {
+        "weight": 10
+    },
+    "leg_armor_2": {
+        "weight": 10
+    },
+    "leg_armor_3": {
+        "weight": 10
+    }    
+}

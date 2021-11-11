@@ -1,0 +1,20 @@
+{
+    "body_armor_1": { 
+        "weight": 10 
+    },
+    "body_armor_2": {
+        "weight": 10
+    },
+    "body_armor_3": {
+        "weight": 10
+    },
+    "leg_armor_1": { 
+        "weight": 10 
+    },
+    "leg_armor_2": {
+        "weight": 10
+    },
+    "leg_armor_3": {
+        "weight": 10
+    }
+}

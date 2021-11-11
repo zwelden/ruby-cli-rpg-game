@@ -121,11 +121,11 @@ class MapGenerator
             ["e", "f", "f", "g", "g", "x", "x", "x", "x", "x", "h", "r", "h", "x", "x", "x", "x", "g", "g", "f", "f", "m", "e"],
             ["e", "f", "g", "g", "x", "x", "h", "h", "r", "h", "h", "r", "h", "h", "r", "h", "x", "x", "g", "g", "f", "w", "e"],
             ["e", "f", "g", "x", "x", "r", "r", "r", "r", "r", "r", "r", "r", "r", "r", "r", "r", "x", "x", "w", "w", "w", "e"],
-            ["e", "f", "g", "x", "h", "r", "h", "h", "r", "h", "h", "r", "h", "h", "r", "h", "r", "r", "x", "w", "f", "f", "e"],
-            ["e", "f", "r", "r", "r", "r", "h", "h", "r", "h", "h", "r", "h", "h", "r", "h", "h", "r", "r", "b", "f", "f", "e"],
+            ["e", "f", "g", "x", "h", "r", "h", "h", "r", "h", "s", "r", "h", "h", "r", "h", "r", "r", "x", "w", "f", "f", "e"],
+            ["e", "f", "r", "r", "r", "r", "s", "h", "r", "h", "h", "r", "h", "h", "r", "h", "h", "r", "r", "b", "f", "f", "e"],
             ["e", "f", "g", "x", "h", "w", "w", "w", "B", "w", "w", "B", "w", "w", "B", "w", "w", "w", "w", "w", "f", "f", "e"],
             ["e", "f", "g", "x", "x", "w", "x", "h", "r", "h", "h", "r", "h", "h", "r", "h", "h", "x", "x", "g", "f", "f", "e"],
-            ["e", "f", "g", "g", "x", "w", "x", "h", "r", "h", "h", "r", "h", "r", "r", "h", "x", "x", "g", "g", "f", "f", "e"],
+            ["e", "f", "g", "g", "x", "w", "x", "h", "r", "h", "h", "r", "s", "r", "r", "h", "x", "x", "g", "g", "f", "f", "e"],
             ["e", "w", "w", "w", "w", "w", "x", "x", "r", "r", "r", "r", "r", "r", "x", "x", "x", "g", "g", "f", "f", "f", "e"],
             ["e", "f", "f", "f", "g", "w", "w", "x", "x", "x", "x", "r", "x", "x", "x", "g", "g", "g", "f", "f", "f", "m", "e"],
             ["e", "m", "f", "f", "f", "f", "w", "g", "g", "g", "g", "r", "g", "g", "g", "g", "g", "f", "f", "f", "m", "m", "e"],
@@ -141,7 +141,29 @@ class MapGenerator
                 entry_coords: [9,14]
             }
         },
-        places: {}
+        places: {
+            '10_6' => {
+                place_type: :shop,
+                name: "Dave's Weapon Outlet",
+                max_items: 4,
+                type: "weapon",
+                level: 1
+            },
+            '6_7' => {
+                place_type: :shop,
+                name: "Franks's Armor Depot",
+                max_items: 4,
+                type: "armor",
+                level: 1
+            },
+            '12_10' => {
+                place_type: :shop,
+                name: "Tims's General Goods Store",
+                max_items: 5,
+                type: "generic",
+                level: 2
+            }
+        }
     }
 
     def self.generate_map_tiles(tile_detail)

@@ -2,14 +2,8 @@
     "dagger_1": {
         "name": "Dagger",
         "type": "weapon",
-        "power": 2,
-        "gold_value": 5
-    },
-    "sword_1": {
-        "name": "Sword",
-        "type": "weapon",
-        "power": 5,
-        "gold_value": 10
+        "power": 3,
+        "gold_value": 6
     },
     "mace_1": {
         "name": "Mace",
@@ -17,11 +11,53 @@
         "power": 4,
         "gold_value": 8
     },
+    "mace_2": {
+        "name": "Spiked Mace",
+        "type": "weapon",
+        "power": 8,
+        "gold_value": 24
+    },
+    "axe_1": {
+        "name": "Hatchet",
+        "type": "weapon",
+        "power": 3,
+        "gold_value": 6
+    },
+    "axe_2": {
+        "name": "Bandit Axe",
+        "type": "weapon",
+        "power": 7,
+        "gold_value": 21
+    },
     "staff_1": {
         "name": "Staff",
         "type": "weapon",
         "power": 3,
-        "gold_value": 7
+        "gold_value": 6
+    },
+    "staff_2": {
+        "name": "Oak Staff",
+        "type": "weapon",
+        "power": 7,
+        "gold_value": 21
+    },
+    "sword_1": {
+        "name": "Short Sword",
+        "type": "weapon",
+        "power": 5,
+        "gold_value": 10
+    },
+    "sword_2": {
+        "name": "Cutlass",
+        "type": "weapon",
+        "power": 10,
+        "gold_value": 30  
+    },
+    "sword_3": {
+        "name": "Broad Swoard",
+        "type": "weapon",
+        "power": 11,
+        "gold_value": 33  
     },
     "shield_1": {
         "name": "Buckler",
@@ -36,10 +72,16 @@
         "gold_value": 10
     },
     "shield_3": {
-        "name": "Steel Shield",
+        "name": "Reinforced Wood Shield",
         "type": "shield",
         "armor": 3,
         "gold_value": 15
+    },
+    "shield_4": {
+        "name": "Steel Shield",
+        "type": "shield",
+        "armor": 4,
+        "gold_value": 20
     },
     "healing_potion_1": {
         "name": "Minor Healing Potion",
@@ -61,21 +103,28 @@
         "gold_value": 5
     },
     "body_armor_2": {
-        "name": "Leather Tunic",
+        "name": "Leather Armor",
         "type": "armor",
         "armor": 3,
         "armor_type": "body",
         "gold_value": 10
     },
     "body_armor_3": {
-        "name": "Chain Mail",
+        "name": "Studded Leather Armor",
         "type": "armor",
         "armor": 4,
         "armor_type": "body",
         "gold_value": 15
     },
     "body_armor_4": {
-        "name": "Plate Mail",
+        "name": "Chain Mail Armor",
+        "type": "armor",
+        "armor": 5,
+        "armor_type": "body",
+        "gold_value": 20
+    },
+    "body_armor_5": {
+        "name": "Plate Armor",
         "type": "armor",
         "armor": 5,
         "armor_type": "body",
@@ -96,14 +145,21 @@
         "gold_value": 10
     },
     "leg_armor_3": {
-        "name": "Chain Mail Pants",
+        "name": "Studded Leather Pants",
         "type": "armor",
         "armor": 4,
         "armor_type": "legs",
         "gold_value": 15
     },
     "leg_armor_4": {
-        "name": "Plate Mail Pants",
+        "name": "Chain Mail Pants",
+        "type": "armor",
+        "armor": 5,
+        "armor_type": "legs",
+        "gold_value": 20
+    },
+    "leg_armor_5": {
+        "name": "Plate Armor Pants",
         "type": "armor",
         "armor": 5,
         "armor_type": "legs",

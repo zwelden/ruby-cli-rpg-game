@@ -40,4 +40,10 @@ class ItemGenerator
         item_key = loot_table.get_random_item 
         self.create_item_from_key(item_key)
     end 
+
+    def self.create_random_item_by_enemy_level(enemy_level)
+        loot_table = LootTable.new(enemy_level)
+        item_key = loot_table.get_random_item 
+        self.create_item_from_key(item_key)
+    end 
 end 

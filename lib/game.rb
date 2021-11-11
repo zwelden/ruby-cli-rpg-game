@@ -101,7 +101,7 @@ class Game
                 num_items = [Dice.d2, Dice.d2].min
                 items = [] 
                 num_items.times do 
-                    item = ItemGenerator.create_random_item()
+                    item = ItemGenerator.create_random_item_by_enemy_level(enemy.level)
                     items.push(item)
                 end
 

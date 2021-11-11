@@ -14,16 +14,19 @@
     "sword_1": {
         "weight": 10
     },
-    "shield_1": {
+    "mace_2": {
         "weight": 10
     },
-    "healing_potion_1": {
-        "weight": 35
-    },
-    "body_armor_1": {
+    "axe_2": {
         "weight": 10
     },
-    "leg_armor_1": {
+    "staff_2": {
+        "weight": 10
+    },
+    "sword_2": {
+        "weight": 10
+    },
+    "sword_3": {
         "weight": 10
     }
 }

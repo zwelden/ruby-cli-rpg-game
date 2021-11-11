@@ -5,8 +5,12 @@ class LootTable
 
     attr_reader :loot_table
 
-    def initialize
-        file_path = TABLE_FILE_PATH + '/generic_loot_table.json'
+    def initialize(enemy_level=0)
+        if (enemy_level > 0)
+            file_path = TABLE_FILE_PATH + "/enemy_level_#{enemy_level}_loot_table.json"
+        else  
+            file_path = TABLE_FILE_PATH + '/generic_loot_table.json'
+        end 
         file = File.read(file_path)
         @loot_table = JSON.parse(file, {symbolize_names: true})
     end 
