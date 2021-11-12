@@ -158,6 +158,10 @@ class Character
         end
     end
 
+    def reward_experience 
+        return 20 + (5 * @level)
+    end 
+
     def get_equipped_stat_value(stat)
         items = [@shield_slot, @weapon_slot, @body_slot, @leg_slot]
         stat_value = 0

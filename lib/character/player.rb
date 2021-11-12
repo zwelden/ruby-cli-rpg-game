@@ -7,6 +7,7 @@ require 'item/weapon'
 require 'item/armor'
 require 'map/tile'
 require 'game_log'
+require 'helpers/string_colorize'
 
 class Player < Character
     attr_reader :coords
@@ -59,8 +60,15 @@ class Player < Character
     end 
 
     def increase_experience(amount)
-        puts "+ #{amount} experience gained"
         @experience += amount 
+        can_level_up = @experience >= next_level_experience() 
+        increase_exp_str = "+ #{amount}".colorize("cyan")
+        puts "#{increase_exp_str} experience gained"
+
+        if (can_level_up)
+            level_up() 
+            puts "You leveled up! You are now level: #{@level.to_s.colorize("cyan")}"
+        end 
     end 
   
     def increase_level 
@@ -80,6 +88,19 @@ class Player < Character
         x_pos, y_pos = @coords
         @prev_coords = [x_pos, y_pos]
     end 
+
+    def next_level_experience()
+        return 50 + (25 * (@level ** 2))
+    end
+
+    def level_up
+        @level += 1
+        @strength += 2 
+        @defense += 1
+        @max_health += 15 
+        @health = @max_health 
+    end 
+
 
     def has_moved? 
         prev_x, prev_y = @prev_coords 
