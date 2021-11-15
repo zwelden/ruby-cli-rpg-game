@@ -35,13 +35,16 @@ class Player < Character
         return Player.new(player_name)
     end
 
-    def sleep 
+    def sleep(show_animation: true)
         update_prev_coords_from_current_position()
         restore_health = @max_health / 2 
         increase_health(restore_health)
-        Animations.sleep_player()
-        puts "You sleep and restore a bit of health"
-        press_any_key_to_continue()
+        
+        if (show_animation == true)
+            Animations.sleep_player()
+            puts "You sleep and restore a bit of health"
+            press_any_key_to_continue()
+        end 
     end
 
     def show_inventory 
