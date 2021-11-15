@@ -1,0 +1,29 @@
+{
+    "g": {
+        "bandit": {
+            "weight": 2
+        }, 
+        "rat": {
+            "weight": 3
+        }
+    },
+    "f": {
+        "wolf": {
+            "weight": 6
+        }, 
+        "spider": { 
+            "weight": 5
+        }, 
+        "forest_troll": {
+            "weight": 2
+        }
+    },
+    "m": {
+        "grizzly_bear": {
+            "weight": 3
+        },
+        "mountain_troll": {
+            "weight": 1
+        }
+    }
+}
