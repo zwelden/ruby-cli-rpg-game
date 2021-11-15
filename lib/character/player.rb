@@ -6,28 +6,32 @@ require 'io/console'
 require 'item/weapon'
 require 'item/armor'
 require 'map/tile'
-require 'game_log'
 require 'helpers/string_colorize'
 
+# This class represents a player playing the game 
 class Player < Character
     attr_reader :coords
     attr_reader :prev_coords
     attr_reader :experience
     attr_reader :tile
 
+    # Initialize the player 
+    #
+    # @param [string] name - name to give the player
     def initialize(name)
         super(name, 50, 6, 3, 1, gold: 10)
 
         @experience = 0
         @coords = [0,0]
+        @prev_coords = [0,0]
         @tile = Tile.new('player')
 
         @weapon_slot = Weapon.new("Rusty Dagger", 2, {power: 1})
         @body_slot = Armor.new("Old Cloth Tunic", 2, {armor: 1, armor_type: "body"})
         @leg_slot = Armor.new("Old Cloth Pants", 2, {armor: 1, armor_type: "legs"})
-        # @logger = GameLog.new 
     end
 
+    # generates a new player by prompting the user for a name to create a player with 
     def self.generate_new_player
         STDIN.iflush()
         print "Choose a name for your character: "
@@ -35,11 +39,14 @@ class Player < Character
         return Player.new(player_name)
     end
 
+    # restores half the player's max health and displays a "sleeping" animation
+    #
+    # @param [boolean] show_animation - used to disable output during testing by setting to false
     def sleep(show_animation: true)
         update_prev_coords_from_current_position()
         restore_health = @max_health / 2 
         increase_health(restore_health)
-        
+
         if (show_animation == true)
             Animations.sleep_player()
             puts "You sleep and restore a bit of health"
@@ -47,6 +54,8 @@ class Player < Character
         end 
     end
 
+    # Display the contents of the player's inventory
+    # NOTE: untested
     def show_inventory 
         update_prev_coords_from_current_position()
 
@@ -55,6 +64,8 @@ class Player < Character
         press_any_key_to_continue()
     end 
 
+    # Display information about all aspecpts of the player: equipped items, inventory, health, exp, etc
+    # NOTE: untested
     def show_full_detail 
         update_prev_coords_from_current_position()
 
@@ -62,40 +73,31 @@ class Player < Character
         Display.full_player_info(self)
     end 
 
-    def increase_experience(amount)
-        @experience += amount 
-        can_level_up = @experience >= next_level_experience() 
-        increase_exp_str = "+ #{amount}".colorize("cyan")
-        puts "#{increase_exp_str} experience gained"
-
-        if (can_level_up)
-            level_up() 
-            puts "You leveled up! You are now level: #{@level.to_s.colorize("cyan")}"
-        end 
-    end 
-  
-    def increase_level 
-        @level += 1
-    end
-
-    def set_start_position(new_x, new_y)
-        @prev_coords = [new_x, new_y]
-        @coords = [new_x, new_y]
-    end
-
-    def set_coords(new_x, new_y)
-        @coords = [new_x, new_y]
-    end
-
-    def update_prev_coords_from_current_position()
-        x_pos, y_pos = @coords
-        @prev_coords = [x_pos, y_pos]
-    end 
-
-    def next_level_experience()
+    # Calculate experience needed to level up based on current level
+    def next_level_experience
         return 50 + (25 * (@level ** 2))
     end
 
+    # Increase the amount of the player's experience, check level increase, and increase level if required
+    #
+    # @param [int] amount
+    def increase_experience(amount, display_output: true)
+        @experience += amount 
+        increase_exp_str = "+ #{amount}".colorize("cyan")
+
+        if (display_output == true)
+            puts "#{increase_exp_str} experience gained"
+        end 
+
+        while (@experience >= next_level_experience())
+            level_up() 
+            if (display_output == true)
+                puts "You leveled up! You are now level: #{@level.to_s.colorize("cyan")}"
+            end 
+        end 
+    end 
+  
+    # Level up a player one level and update variables associated with a level up
     def level_up
         @level += 1
         @strength += 2 
@@ -104,7 +106,30 @@ class Player < Character
         @health = @max_health 
     end 
 
+    # Set/reset the intial x,y position of the player 
+    #
+    # @param [int] nex_x 
+    # @param [int] new_y
+    def set_start_position(new_x, new_y)
+        @prev_coords = [new_x, new_y]
+        @coords = [new_x, new_y]
+    end
 
+    # Set the current position of the player 
+    #
+    # @param [int] nex_x 
+    # @param [int] new_y
+    def set_coords(new_x, new_y)
+        @coords = [new_x, new_y]
+    end
+
+    # Copy current x,y position to @prev_coords variable
+    def update_prev_coords_from_current_position
+        x_pos, y_pos = @coords
+        @prev_coords = [x_pos, y_pos]
+    end 
+
+    # Determine if a player has moved by comparing @coords to @prev_coords
     def has_moved? 
         prev_x, prev_y = @prev_coords 
         curr_x, curr_y = @coords 
@@ -116,6 +141,10 @@ class Player < Character
         end 
     end 
 
+    # Move handler 
+    #
+    # @param [<Map>] map - map on which valid moves are evaluated 
+    # @param [symbol] direction - valid inputs: [:up, :down, :left, :right]
     def move(map, direction)
         update_prev_coords_from_current_position()
 
@@ -134,6 +163,9 @@ class Player < Character
         end
     end
 
+    # Move the player's x,y coordinants "up"
+    #
+    # @param [<Map>] map - map on which valid moves are evaluated 
     def move_up(map)
         x_pos, y_pos = @coords
 
@@ -143,6 +175,9 @@ class Player < Character
         end
     end 
 
+    # Move the player's x,y coordinants "down"
+    #
+    # @param [<Map>] map - map on which valid moves are evaluated 
     def move_down(map)
         x_pos, y_pos = @coords
 
@@ -152,6 +187,9 @@ class Player < Character
         end
     end 
 
+    # Move the player's x,y coordinants "left"
+    #
+    # @param [<Map>] map - map on which valid moves are evaluated 
     def move_left(map)
         x_pos, y_pos = @coords
 
@@ -161,6 +199,9 @@ class Player < Character
         end
     end 
 
+    # Move the player's x,y coordinants "right"
+    #
+    # @param [<Map>] map - map on which valid moves are evaluated 
     def move_right(map)
         x_pos, y_pos = @coords
 

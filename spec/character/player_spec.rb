@@ -1,4 +1,5 @@
 require 'character/player'
+require 'map/map_generator'
 
 describe Player do 
 
@@ -58,7 +59,7 @@ describe Player do
         expect(player.name).to eq 'George Washington'
     end
 
-    it "sleeping displays an animation to stdio and increases health by half max health" do 
+    it "sleeping increases health by half max health" do 
         player = Player.new("test player")
         max_health = player.health
         player.reduce_health( (max_health - 1) )
@@ -66,4 +67,85 @@ describe Player do
         expect(player.health).to eq (max_health - (max_health / 2) + 1)
     end
 
+    it "calculates experience needed for leveling up" do 
+        player = Player.new("test player")
+        expect( player.next_level_experience() ).to eq 75
+    end 
+
+    it "levels up a character after reaching reaching required experience amount" do
+        player = Player.new("test player")
+        player.increase_experience(100, display_output: false)
+        expect( player.experience ).to eq 100 
+        expect( player.level ).to eq 2 
+        expect( player.health ).to eq 65 
+        expect( player.strength ).to eq 8 
+        expect( player.defense ).to eq 4
+    end
+
+    it "can level a player multiple levels with enough added experience" do 
+        player = Player.new("test player")
+        player.increase_experience(2000, display_output: false)
+        expect( player.experience ).to eq 2000 
+        expect( player.level ).to eq 9
+        expect( player.health ).to eq 170 
+        expect( player.strength ).to eq 22 
+        expect( player.defense ).to eq 11
+    end 
+
+    it "has a default start position of 0,0" do 
+        player = Player.new("test player")
+        expect( player.coords ).to eq [0,0]
+        expect( player.prev_coords ).to eq [0,0]
+    end 
+
+    it "sets starting coordinates correctly" do 
+        player = Player.new("test player")
+        player.set_start_position(3, 7)
+        expect( player.coords ).to eq [3,7]
+        expect( player.prev_coords ).to eq [3,7]
+    end 
+    
+    it "can move on a given map" do 
+        player = Player.new("test player")
+        map = MapGenerator.generate_new_map("test")
+        player.set_start_position(*map.start_position) # 1,1
+        expect( player.coords ).to eq [1, 1] 
+        expect( player.prev_coords ).to eq [1, 1] 
+
+        player.move(map, :down)
+        expect( player.coords ).to eq [1, 2]
+        expect( player.prev_coords ).to eq [1, 1] 
+
+        player.move(map, :right)
+        expect( player.coords ).to eq [2, 2]
+        expect( player.prev_coords ).to eq [1, 2] 
+
+        player.move(map, :right)
+        player.move(map, :right)
+        player.move(map, :down)
+        player.move(map, :down)
+        player.move(map, :left)
+        player.move(map, :left)
+        player.move(map, :up)
+        expect( player.coords ).to eq [2, 3]
+        expect( player.prev_coords ).to eq [2, 4] 
+    end 
+
+    it "cannot move to restricted squares on a given map" do 
+        player = Player.new("test player")
+        map = MapGenerator.generate_new_map("test")
+        player.set_start_position(*map.start_position) # 1,1
+        player.move(map, :left)
+
+        expect(player.coords ).to eq [1,1]
+    end 
+
+    it "cannot move out of bounds on a given map" do 
+        player = Player.new("test player")
+        map = MapGenerator.generate_new_map("test")
+        player.set_start_position(0, 0) # normally unable to even move to this square, but can be placed on it for purposes of testing
+        player.move(map, :up)
+
+        expect(player.coords ).to eq [0,0]
+    end 
 end
