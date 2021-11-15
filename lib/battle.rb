@@ -160,7 +160,7 @@ class Battle
         display_damage_done(damage, is_crit, @player, enemy)
 
         if (enemy.is_alive? == false)
-            exp = enemy.reward_experience() 
+            exp = enemy.calculate_reward_experience() 
             @player.increase_experience(exp)
             puts "#{@player.name} kills #{enemy.name}"
         end 
