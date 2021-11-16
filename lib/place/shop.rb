@@ -182,7 +182,7 @@ class Shop < Place
     def store_loop(player)
         while(@player_in_store) 
             system "clear"
-            Display.show_shop(@name, @items_for_sale, player)
+            Display.show_shop(@name, @items_for_sale, @shop_markup, player)
             action = get_next_store_action()
             handle_store_action(action,  player)
         end 

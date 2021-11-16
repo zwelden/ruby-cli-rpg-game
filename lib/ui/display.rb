@@ -229,7 +229,7 @@ class Display
         puts display_info
     end 
 
-    def self.show_shop(shop_name, shop_inventory, player)
+    def self.show_shop(shop_name, shop_inventory, shop_markup, player)
         player_inventory = player.inventory 
         player_gold = player.gold
         shop_name_str = shop_name.ljust(71, ' ').colorize("cyan")
@@ -265,7 +265,7 @@ class Display
             end 
 
             if (shop_item != nil)
-                buy_value = shop_item.gold_value * 2
+                buy_value = shop_item.gold_value * shop_markup
                 shop_item_str = "#{shop_item.name}".ljust(23, ' ')
                 shop_item_price_str = "#{buy_value}".rjust(5, ' ').colorize("red")
                 shop_buy_str = " #{item_num_str} #{shop_item_str} #{shop_item_price_str} │"
