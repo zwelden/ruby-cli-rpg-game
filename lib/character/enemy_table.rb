@@ -17,6 +17,7 @@ class EnemyTable
     # Get a hash object representing an enemy by was of a key symbol 
     #
     # @param [symbol] key - symbol value representing an enemy
+    # @return [hash|nil] - hash object enumerating enemy characteristics
     def get_enemy_info_by_key(key)
         enemy = nil
 
