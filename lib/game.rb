@@ -9,7 +9,7 @@ require 'helpers/utilities'
 require 'ui/display'
 require 'battle'
 
-
+# Class for managing game player and game event loops
 class Game 
     attr_reader :turn_count
     attr_reader :cooldowns
@@ -20,6 +20,7 @@ class Game
     attr_reader :enemy_generator
     attr_reader :enemy_zone_table
 
+    # Init
     def initialize
         @game_over = false
         @turn_count = 0 
@@ -33,6 +34,7 @@ class Game
         @player.set_start_position(*map.start_position)
     end
 
+    # Increment the turn count and update all game cooldowns
     def increase_turn_count
         @turn_count += 1
 
@@ -44,31 +46,46 @@ class Game
         end 
     end 
 
+    # Add a cooldown to the @cooldowns hash 
+    #
+    # @param [symbol] cooldown 
+    # @param [int] turns - how long cooldown lasts in # of turns
     def add_cooldown(cooldown, turns)
         @cooldowns[cooldown] = {turns: turns}
     end 
 
+    # get a cooldown info from symbol 
+    #
+    # @param [symbol] cooldown 
+    # @return [hash] {turns: [int]}
     def get_cooldown(cooldown)
         @cooldowns[cooldown]
     end
 
+    # Set game_over state to true 
     def end_game 
         @game_over = true 
     end 
 
+    # Display the game map 
     def render_map_state
         puts @map.render_map(@player)
     end 
 
+    # Display summary info about player
     def render_player_info 
         Display.player_info(@player)
     end
 
+    # Get the Map Tile found at the player's x,y coordinates 
+    #
+    # @return [<Tile>]
     def get_tile_at_player_x_y
         player_x, player_y = @player.coords 
         @map.get_tile(player_x, player_y)
     end 
 
+    # Get a random number of enemies between 1-3 weighted in favor of fewer enemies
     def get_num_enemies 
         enemy_roll = Dice.d10 
         if (enemy_roll == 10)
@@ -80,6 +97,9 @@ class Game
         end 
     end
 
+    # Create ranomd enemies and then add to given tile 
+    #
+    # @param [<tile>] tile 
     def create_enemies(tile)
         enemy_arr = []
         
@@ -112,7 +132,7 @@ class Game
         tile.load_enemies(enemy_arr)
     end
 
-
+    # Determine if current player x,y position can have a battle instantiated 
     def check_for_battle
         if (@player.has_moved? == false)
             return false 
@@ -135,7 +155,9 @@ class Game
         false
     end
 
-
+    # Create a random treasure and add it to the given tile 
+    #
+    # @param [<Tile>] Tile
     def create_treasure(tile) 
         gold = (Dice.d10 + Dice.d10) * @player.level 
         items = []
@@ -152,6 +174,7 @@ class Game
         tile.load_treasure(gold, items)
     end
 
+    # Determine if the current player x,y position can have a treasure event instantiated
     def check_for_treasure
         if (@player.has_moved? == false)
             return false 
@@ -173,6 +196,9 @@ class Game
         false
     end 
 
+    # Determine if current player x,y requires loading a new map 
+    #
+    # @return [boolean]
     def check_for_new_map_load
         tile = get_tile_at_player_x_y()
 
@@ -181,6 +207,9 @@ class Game
         end 
     end 
 
+    # Determine which map to load based on @map.gateways hash 
+    #
+    # @param [string|int] - symbol coresponing to new map zone
     def get_new_map_zone_to_load
         x_pos, y_pos = @player.coords 
 
@@ -190,6 +219,9 @@ class Game
         new_map_zone 
     end
     
+    # Determine if current player x,y requires instantinating a shop instance 
+    #
+    # @return [boolean]
     def check_for_shop
         if (player.has_moved? == false)
             return false 
@@ -200,6 +232,9 @@ class Game
         return tile.is_shop?
     end 
 
+    # Generate a new shop class based on current player x,y position 
+    #
+    # @return [<Shop>]
     def create_shop
         x_pos, y_pos = @player.coords 
         place_key = "#{x_pos}_#{y_pos}"
@@ -212,6 +247,9 @@ class Game
         Shop.new(shop_name, shop_max_items, shop_type, shop_level)
     end 
 
+    # Check @places_visted to see if current player x,y position corresponds to an already instantiated place 
+    #
+    # @return [<Place>|nil]
     def get_place_from_places_visited
         map_name = @map.name 
         x_pos, y_pos = @player.coords 
@@ -225,6 +263,9 @@ class Game
         map_places[coords_str]
     end 
 
+    # Add place object to @places_visited hash 
+    # 
+    # @param [<Place>] place
     def add_place_to_places_visited(place)
         map_name = @map.name 
         x_pos, y_pos = @player.coords 
@@ -238,6 +279,7 @@ class Game
     # GAME SEQUENCES #
     # ************** #
 
+    # Game loop for handling new map loading
     def new_map_sequence 
         return if @game_over
 
@@ -255,6 +297,7 @@ class Game
         end 
     end 
 
+    # Game loop for handling battle events
     def battle_sequence 
         return if @game_over
 
@@ -269,6 +312,7 @@ class Game
         end 
     end
 
+    # Game loop for handing treasure events
     def treasure_sequence 
         return if @game_over
 
@@ -294,6 +338,7 @@ class Game
         end
     end
 
+    # Game loop for handling shop visits 
     def shop_sequence 
         return if @game_over
 
@@ -316,6 +361,7 @@ class Game
         end 
     end 
 
+    # Display update game state/map
     def render_state 
         return if @game_over
 
@@ -324,6 +370,7 @@ class Game
         render_player_info()
     end 
 
+    # Main loop
     def game_sequence 
         new_map_sequence()
         battle_sequence()

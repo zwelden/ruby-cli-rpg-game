@@ -2,6 +2,7 @@ require 'map/map'
 require "map/tile"
 require "character/enemy"
 
+# Stores map details and generates Map items 
 class MapGenerator 
 
     MAP_1 = {
@@ -192,6 +193,10 @@ class MapGenerator
         places: {}
     }
 
+    # Creates Tile objects based on X by Y array of tile types 
+    #
+    # @param [array] tile_detail - tiles: key on mapy type constants hash
+    # @return [array[<Tile>]]
     def self.generate_map_tiles(tile_detail)
         tiles = []
 
@@ -208,6 +213,10 @@ class MapGenerator
         tiles
     end
 
+    # Create a new Map object by zone value 
+    #
+    # @param [string|int] zone
+    # @return [<Map>]
     def self.generate_new_map(zone)
         map_template = case zone
             when 1

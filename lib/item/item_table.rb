@@ -1,7 +1,7 @@
 require 'json'
 
 # Loads the contents of the item table json file into a holding object for querying
-# The item table will contain all enemies that can be dynamically generated
+# The item table will contain all items that can be dynamically generated
 class ItemTable
     TABLE_FILE_PATH = File.expand_path(File.dirname(__FILE__)) + '/tables'
 

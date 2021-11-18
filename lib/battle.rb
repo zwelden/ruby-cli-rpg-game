@@ -4,7 +4,13 @@ require 'helpers/utilities'
 require 'helpers/string_colorize'
 require 'ui/display'
 
+# Handle battle loop events, actions, and outcomes
 class Battle 
+
+    # Init 
+    # 
+    # @param [<Player>] player 
+    # @param [<Map>] map
     def initialize(player, map)
         player_x, player_y = player.coords
 
@@ -17,6 +23,7 @@ class Battle
         battle_loop()
     end 
 
+    # Display current state of the battle
     def define_battle 
         system "clear"
 
@@ -30,11 +37,19 @@ class Battle
         puts "f - Fight"
     end 
 
+    # Get input for next battle action taken by player 
+    #
+    # @return [string]
     def get_next_battle_action
         print "> "
         gets.chomp
     end
 
+    # Determine amount of damage done by attacker to defender 
+    # 
+    # @param [<Character>] attacker 
+    # @param [<Character>] defender 
+    # @return [ array ] - [[int], [boolean]]
     def calculate_damage(attacker, defender)
         is_crit = (Dice.d20 == 20)
 
@@ -56,6 +71,12 @@ class Battle
         [damage, is_crit] 
     end 
 
+    # output to terminal result of an attack 
+    # 
+    # @param [int] damage 
+    # @param [boolean] is_crit 
+    # @param [<Character>] attacker 
+    # @param [<Character>] defender
     def display_damage_done(damage, is_crit, attacker, defender)
         atk_color = "red"
         def_color = "green"
@@ -76,6 +97,7 @@ class Battle
         end 
     end 
 
+    # Attempt to escape from a battle 
     def run_away 
         total_damage = 0 
 
@@ -106,6 +128,9 @@ class Battle
         @ran_away = true
     end
 
+    # Display prompts for choosing enemy to attack
+    #
+    # @return [<Enemy>]
     def select_enemy 
         system "clear"
         Display.display_all_enemy_info(@enemies)
@@ -138,6 +163,7 @@ class Battle
         end 
     end
 
+    # Action handler for fight sequence
     def fight 
         enemy = select_enemy()
         attack_enemy(enemy)
@@ -152,6 +178,9 @@ class Battle
         press_any_key_to_continue()
     end
         
+    # Event handler for attacking a chosen enemy 
+    #
+    # @param [<Enemy>] enemy
     def attack_enemy(enemy)
         damage, is_crit = calculate_damage(@player, enemy)
         enemy.reduce_health(damage)
@@ -166,6 +195,7 @@ class Battle
         end 
     end 
 
+    # Event sequence for enmey attack turns 
     def enemy_attacks 
         puts "The enemy(s) attack"
 
@@ -184,6 +214,9 @@ class Battle
         end 
     end 
 
+    # Determine if all enemies have been killed 
+    #
+    # @return [boolean]
     def all_enemies_dead? 
         enemy_alive = false 
         @enemies.each do |enemy|
@@ -195,6 +228,9 @@ class Battle
         !enemy_alive 
     end 
 
+    # Get any battle loot if it exists 
+    #
+    # @return [array] - [[int], [array]]
     def get_battle_loot
         gold = 0 
         inventory = []
@@ -209,11 +245,18 @@ class Battle
         [gold, inventory]
     end 
 
+    # Add loot to player's inventory 
+    #
+    # @param [int] gold 
+    # @param [array] inventory 
     def update_player_loot(gold, inventory)
         @player.add_gold(gold) 
         @player.add_inventory(inventory)
     end
         
+    # Battle loop action handler 
+    #
+    # @param [string] action
     def handle_battle_action(action)
         case action
         when "r"
@@ -230,6 +273,7 @@ class Battle
         end
     end
 
+    # Main battle loop initiator
     def battle_loop 
         while(@player.is_alive? && all_enemies_dead?() == false && @in_battle == true) 
             define_battle()
